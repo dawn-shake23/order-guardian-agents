@@ -1,107 +1,156 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from pydantic import BaseModel, Field, field_validator
 from .base_worker import AgentMeta, BaseWorkerAgent, AgentInput, AgentOutput
-# 新增：模型调用统一封装（预留 Qwen 14B/Llama 3 8B 接入）
 from Model.llm_client import LLMClient, ModelType
 
+
+# ==========================================================
+# 意图理解（Intent Understanding）
+# 任务重写（Task Rewriting）
+# 全局分析（Global Analysis）
+# 订单数据需求（Data Requirements）
+# 业务手册向量检索需求（Knowledge Retrieval Requirements）
+# 结构化步骤（Steps）
+# 校验点（Validation Points）
+# 区分 “订单数据” vs “向量知识” 两类数据源
+# 全链路 Pydantic 强校验
+# ==========================================================
+
 # -----------------------------------------------------------------------------
-# 1. Plan Agent 专属 Schema（强校验：输出必须是这个结构，不依赖模型）
-# 完全对齐 Claude Code：Plan 只输出步骤蓝图，不执行、不调度
+# 1. 意图理解（Intent Understanding）
+# -----------------------------------------------------------------------------
+class IntentUnderstanding(BaseModel):
+    raw_query: str
+    rewritten_query: str = Field(description="任务重写：模糊用户输入 → 精确可执行语义")
+    intent_type: str = Field(description="order_query / payment_check / risk_judge / reconcile / operation")
+    constraints: List[str]
+    sensitive_flags: List[str] = Field(default_factory=list)
+
+
+# -----------------------------------------------------------------------------
+# 2. 全局分析（Global Analysis）
+# -----------------------------------------------------------------------------
+class GlobalAnalysis(BaseModel):
+    order_state_analysis: str
+    risk_prejudgment: str
+    abnormal_level: str = Field(pattern=r"low|medium|high")
+    complexity: str = Field(pattern=r"low|medium|high")
+    data_dependencies: List[str]
+
+
+# -----------------------------------------------------------------------------
+# 3. 数据需求（订单体系）
+# -----------------------------------------------------------------------------
+class DataRequirement(BaseModel):
+    order_data: List[str]
+    payment_data: List[str]
+    risk_data: List[str]
+    reconciliation_data: List[str]
+
+
+# -----------------------------------------------------------------------------
+# 4. 知识检索需求（业务手册向量库）
+# -----------------------------------------------------------------------------
+class KnowledgeRetrievalDemand(BaseModel):
+    retrieval_queries: List[str]
+    retrieval_scenes: List[str] = Field(description="哪些步骤需要向量检索")
+    knowledge_type: List[str] = Field(description="rule / process / case / policy")
+
+
+# -----------------------------------------------------------------------------
+# 5. 规划步骤（Claude Code 核心 Step 结构）
 # -----------------------------------------------------------------------------
 class PlanStep(BaseModel):
-    """单一步骤强校验（Pydantic 兜底，模型输出再乱也能校验）"""
-    step_id: int = Field(ge=1, description="步骤ID，从1开始递增")
-    expert_type: str = Field(description="对应子Agent类型：order/payment/risk/operation/reconciliation")
-    task: str = Field(description="当前步骤具体任务")
-    required_fields: list[str] = Field(description="当前步骤必须的输入字段")
-    description: str = Field(description="步骤说明，明确执行目的")
+    step_id: int = Field(ge=1)
+    expert_type: str
+    goal: str
+    data_used: List[str] = Field(description="该步骤需要哪些订单数据")
+    retrieval_used: bool = Field(description="该步骤是否需要查业务手册向量")
+    validation_criteria: Dict[str, Any]
+    expected_output: str
+    depends_on: List[int] = Field(default_factory=list)
 
-    # 强校验：expert_type 必须是指定范围（防止模型输出乱码）
-    @field_validator('expert_type')
-    def expert_type_valid(cls, v):
-        valid_types = ["order", "payment", "risk", "operation", "reconciliation"]
-        if v not in valid_types:
-            raise ValueError(f"expert_type 必须是 {valid_types} 中的一种")
-        return v
-
-class ExecutionPlan(BaseModel):
-    """完整执行计划强校验（统一输出格式）"""
-    session_id: str
-    order_id: str
-    task_subject: str = Field(description="异常任务主题，如：订单支付失败诊断")
-    steps: list[PlanStep] = Field(min_items=1, description="至少1个执行步骤")
-    final_goal: str = Field(description="最终会诊目标")
 
 # -----------------------------------------------------------------------------
-# 2. Plan Agent 元数据（风控/权限/超时/约束，不变）
+# 6. 完整规划（Claude Code 标准 Plan）
+# -----------------------------------------------------------------------------
+class ExecutionPlan(BaseModel):
+    # 基础信息
+    session_id: str
+    order_id: str
+
+    # Claude Code 核心：意图理解
+    intent: IntentUnderstanding
+
+    # Claude Code 核心：全局分析
+    global_analysis: GlobalAnalysis
+
+    # 数据需求（订单体系）
+    data_requirements: DataRequirement
+
+    # 知识需求（向量手册体系）
+    knowledge_demand: KnowledgeRetrievalDemand
+
+    # 步骤
+    steps: List[PlanStep] = Field(min_items=1)
+
+    # 最终目标
+    final_goal: str
+    success_criteria: Dict[str, Any]
+
+
+# -----------------------------------------------------------------------------
+# Plan Agent 元数据
 # -----------------------------------------------------------------------------
 PLAN_AGENT_META = AgentMeta(
     agent_type="plan",
     version="1.0.0",
-    timeout_seconds=25,  # 强模型推理稍久，超时设为25s
+    timeout_seconds=30,
     required_fields=["order_id", "abnormal_detail"],
-    acl_scopes=["plan:create"]
+    acl_scopes=["plan:create", "plan:rewrite", "plan:analyze"]
 )
 
+
 # -----------------------------------------------------------------------------
-# 3. PlanAgent 核心实现（适配强模型，预留切换口）
-# 遵循 Claude Code 思想 + 你的要求：
-# ✅ 用 Qwen 14B/Llama 3 8B 做规划（强模型决策）
-# ✅ 无状态、无记忆，只输出结构化计划
-# ✅ 全链路 Pydantic 校验，不依赖模型输出质量
-# ✅ 预留模型切换口，不硬编码
+# 真正实现 Claude Code 标准 PlanAgent
 # -----------------------------------------------------------------------------
 class PlanAgent(BaseWorkerAgent):
     def __init__(self, llm_client: Optional[LLMClient] = None):
-        super().__init__(meta=PLAN_AGENT_META)
-        # 核心：Plan 用强模型（Qwen 14B / Llama 3 8B），预留切换
-        self.llm_client = llm_client or LLMClient(model_type=ModelType.QWEN_14B)  # 默认Qwen 14B
-        # 固定提示词（结构化输出引导，降低模型依赖）
-        self.plan_prompt_template = """
-        你是多Agent会诊系统的Plan规划师，负责生成结构化、可执行的异常订单会诊步骤。
-        核心要求：
-        1. 仅输出 ExecutionPlan 格式的结构化数据，不添加任何多余描述
-        2. 步骤按「订单查询→支付核查→风控校验→对账分析→运营建议」的逻辑排序
-        3. 每个步骤的 expert_type 必须是 order/payment/risk/operation/reconciliation 中的一种
-        4. required_fields 必须是当前步骤执行的最小必要字段
-        5. 结合异常详情，生成精准步骤，不冗余、不遗漏
+        super().__init__(PLAN_AGENT_META)
+        # Plan 使用强模型：Qwen14B / Llama3 8B
+        self.llm = llm_client or LLMClient(model_type=ModelType.QWEN_14B)
 
-        输入信息：
-        session_id: {session_id}
-        order_id: {order_id}
-        异常详情: {abnormal_detail}
-        """
+        # 固定提示词（结构化输出，不依赖模型能力）
+        self.prompt = """
+你是 Claude Code 风格的 Plan 规划器。
+你的任务是：
+1. 理解用户意图
+2. 重写任务（rewriting）
+3. 对订单异常做全局分析
+4. 明确需要哪些订单数据
+5. 明确需要哪些业务手册向量知识
+6. 生成可执行、可调度、强校验的步骤列表
+
+输出必须完全符合 ExecutionPlan 结构，不允许额外文本。
+"""
 
     def execute(self, agent_input: AgentInput) -> Dict[str, Any]:
         """
-        调用强模型（Qwen 14B/Llama 3 8B）生成结构化执行计划
-        所有输出经过 Pydantic 校验，不依赖模型能力上限
+        执行 Claude Code 标准规划：
+        意图理解 → 重写 → 全局分析 → 数据需求 → 知识需求 → 步骤
         """
-        # 1. 入参已由基类 Pydantic 强校验（兜底，模型不需要管校验）
         params = agent_input.params
-        session_id = agent_input.session_id
         order_id = agent_input.order_id
-        abnormal_detail = params.get("abnormal_detail")
+        abnormal_detail = params.get("abnormal_detail", "")
 
-        # 2. 强校验：必传字段二次兜底（防止模型忽略入参）
-        if not abnormal_detail or len(abnormal_detail.strip()) == 0:
-            raise ValueError("规划失败：缺少异常详情 abnormal_detail，无法生成步骤")
-
-        # 3. 调用强模型生成计划（预留模型切换，只需改 model_type 即可）
-        prompt = self.plan_prompt_template.format(
-            session_id=session_id,
-            order_id=order_id,
-            abnormal_detail=abnormal_detail
-        )
-        # 模型调用：指定输出格式为 ExecutionPlan，强制结构化
-        llm_response = self.llm_client.generate(
-            prompt=prompt,
-            output_schema=ExecutionPlan  # 关键：让模型输出符合Pydantic结构
+        # 调用强模型生成结构化 Plan
+        raw_result = self.llm.generate(
+            prompt=self.prompt + f"\n输入：{abnormal_detail}",
+            output_schema=ExecutionPlan
         )
 
-        # 4. Pydantic 强校验：无论模型输出多乱，都要校验通过才返回
-        # 这里会自动校验所有字段（step_id范围、expert_type合法性等）
-        execution_plan = ExecutionPlan(**llm_response["data"])
+        # Pydantic 强校验（无论模型输出多乱，都要通过）
+        plan = ExecutionPlan(**raw_result["data"])
 
-        # 5. 返回结构化数据（基类自动包装成标准 AgentOutput）
-        return execution_plan.model_dump()
+        # 返回严格校验通过的规划
+        return plan.model_dump()
