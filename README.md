@@ -27,5 +27,15 @@
 9. VectorStore 向量存储
 10. Runtime 运行时与多轮对话
 
+1. Schema          统一结构规范
+2. Model           LLM 模型调用（强模型/轻量模型）
+3. Plan Agent      意图理解 + rewriting + 全局分析 + 步骤规划
+4. Coordinator     任务调度、决策、汇总、流程编排
+5. MCP             控制平面：权限、ACL、Prompt、上下文切片、Memory 访问策略
+6. Memory          数据平面：缓存、会话记忆、步骤状态、持久化
+7. Tools / Skill   原子能力 & 业务能力
+8. Workers         轻量专家 Agent
+9. Monitor         监控、超时、熔断、日志
+
 ## 开发状态
 🔥 正在迭代建设中…
