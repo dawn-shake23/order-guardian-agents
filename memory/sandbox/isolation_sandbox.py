@@ -1,27 +1,41 @@
-from typing import Any, Optional
-from models.sandbox_memory import AgentSandboxMemory
-from core.lifecycle import MemoryLifeCycle
+from typing import Dict, Any, Optional
+from pydantic import BaseModel
+
+class SandboxMeta(BaseModel):
+    session_id: str
+    step_id: int
+    agent_type: str
+    created_at: float
 
 class IsolatedAgentSandbox:
-    def __init__(self, sandbox_meta: AgentSandboxMemory):
-        self.meta = sandbox_meta
-        self.is_destroyed = False
-
-    # 沙盒写入（配额+权限校验）
-    def set_data(self, key: str, value: Any, agent_type: str) -> None:
-        if self.is_destroyed:
-            raise RuntimeError("沙盒已销毁，无法写入")
-        if not MemoryLifeCycle.is_sandbox_valid(self.meta, agent_type):
-            raise PermissionError("沙盒权限校验失败")
-        self.meta.private_data[key] = value
-
-    # 沙盒读取
-    def get_data(self, key: str, agent_type: str) -> Optional[Any]:
-        if not MemoryLifeCycle.is_sandbox_valid(self.meta, agent_type):
-            raise PermissionError("沙盒权限校验失败")
-        return self.meta.private_data.get(key)
-
-    # 主动销毁
-    def destroy(self) -> None:
-        MemoryLifeCycle.destroy_sandbox(self.meta)
-        self.is_destroyed = True
+    def __init__(self, meta: SandboxMeta):
+        self.meta = meta
+        self.data: Dict[str, Any] = {}
+    
+    def get(self, key: str) -> Optional[Any]:
+        """
+        从沙箱中获取数据
+        """
+        return self.data.get(key)
+    
+    def set(self, key: str, value: Any) -> bool:
+        """
+        向沙箱中设置数据
+        """
+        self.data[key] = value
+        return True
+    
+    def delete(self, key: str) -> bool:
+        """
+        从沙箱中删除数据
+        """
+        if key in self.data:
+            del self.data[key]
+            return True
+        return False
+    
+    def clear(self):
+        """
+        清空沙箱数据
+        """
+        self.data.clear()

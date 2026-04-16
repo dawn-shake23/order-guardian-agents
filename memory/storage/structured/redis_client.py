@@ -1,25 +1,42 @@
-import redis
-from typing import Optional, Dict, Any
-from datetime import datetime
-from models.struct_memory import SessionMemory, StepMemory
+from typing import Optional, Any
+import json
 
 class RedisMemoryClient:
-    def __init__(self, host: str = "localhost", port: int = 6379, db: int = 0):
-        self.client = redis.Redis(host=host, port=port, db=db, decode_responses=True, charset="utf-8")
-
-    # 存储会话记忆（带TTL）
-    def set_session_memory(self, memory: SessionMemory) -> None:
-        key = f"session:{memory.session_id}"
-        self.client.hset(key, mapping=memory.model_dump())
-        self.client.expire(key, memory.ttl_seconds)
-
-    # 获取会话记忆
-    def get_session_memory(self, session_id: str) -> Optional[Dict[str, Any]]:
-        key = f"session:{session_id}"
-        return self.client.hgetall(key)
-
-    # 存储断点数据
-    def set_breakpoint(self, step_memory: StepMemory) -> None:
-        key = f"breakpoint:{step_memory.session_id}:{step_memory.step_id}"
-        self.client.json().set(key, "$", step_memory.model_dump())
-        self.client.expire(key, step_memory.ttl_seconds)
+    def __init__(self):
+        # 实际项目中这里应该初始化真实的Redis客户端
+        self.memory = {}
+    
+    def get(self, key: str) -> Optional[Any]:
+        """
+        获取内存中的值
+        """
+        return self.memory.get(key)
+    
+    def set(self, key: str, value: Any, expire: Optional[int] = None) -> bool:
+        """
+        设置内存中的值
+        """
+        self.memory[key] = value
+        return True
+    
+    def delete(self, key: str) -> bool:
+        """
+        删除内存中的值
+        """
+        if key in self.memory:
+            del self.memory[key]
+            return True
+        return False
+    
+    def exists(self, key: str) -> bool:
+        """
+        检查key是否存在
+        """
+        return key in self.memory
+    
+    def expire(self, key: str, seconds: int) -> bool:
+        """
+        设置key的过期时间
+        """
+        # 实际项目中需要实现过期时间管理
+        return True

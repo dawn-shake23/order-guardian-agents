@@ -1,50 +1,71 @@
-from MCP.acl.acl_matrix import AGENT_ACL
-from MCP.prompt_manager.prompts import PROMPTS
-from MCP.memory_manager.memory_acl import MemoryACL
+from typing import Dict, Any, Optional
+from memory.memory_hub import MemoryHub
+from MCP.acl.acl_matrix import ACLMatrix
+from MCP.prompt_manager.prompts import PromptManager
 from MCP.context_manager.slicer import ContextSlicer
-from Memory.core.context_memory import ContextMemory
+from MCP.memory_manager.memory_acl import MemoryACL
+from MCP.tool_guard.tool_acl import ToolACL
+from MCP.validator.step_validator import StepValidator
 
 class MCPGateway:
-    def __init__(self):
-        self.prompt_tpl = PROMPTS
-
-    def build_agent_exec_context(
-        self,
-        agent_type: str,
-        global_context: dict,
-        context_memory: ContextMemory
-    ) -> dict:
+    def __init__(self, memory_hub: MemoryHub):
+        self.memory_hub = memory_hub
+        self.acl_matrix = ACLMatrix()
+        self.prompt_manager = PromptManager()
+        self.context_slicer = ContextSlicer()
+        self.memory_acl = MemoryACL(memory_hub)
+        self.tool_acl = ToolACL()
+        self.validator = StepValidator()
+    
+    def check_agent_permission(self, agent_type: str, action: str) -> bool:
         """
-        MCP 核心：
-        1. 做权限判断
-        2. 做上下文切片
-        3. 组装专属 Prompt
-        4. 不操作 Memory，只告诉别人能不能读
+        检查Agent权限
         """
-        # 1. 权限：是否允许读全局上下文
-        if not MemoryACL.can_read_global(agent_type):
-            raise PermissionError(f"{agent_type} 无全局上下文权限")
-
-        # 2. 字段白名单
-        allowed_fields = AGENT_ACL[agent_type]["fields"]
-
-        # 3. 上下文切片（MCP 控制，Memory 只存结果）
-        sliced_ctx = ContextSlicer.slice_by_acl(
-            agent_type, global_context, allowed_fields
-        )
-        context_memory.set_sliced(agent_type, sliced_ctx)
-
-        # 4. 生成该专家专属 Prompt
-        prompt = self.prompt_tpl[agent_type].format(context=sliced_ctx)
-
-        # 5. 工具权限
-        allowed_tools = AGENT_ACL[agent_type]["tools"]
-
-        return {
-            "agent_type": agent_type,
-            "prompt": prompt,
-            "sliced_context": sliced_ctx,
-            "allowed_tools": allowed_tools,
-            "can_read_memory": MemoryACL.can_read_global(agent_type),
-            "can_write_memory": MemoryACL.can_write_global(agent_type)
-        }
+        return self.acl_matrix.check_permission(agent_type, action)
+    
+    def get_prompt(self, agent_type: str, task_type: str) -> str:
+        """
+        获取Agent提示词
+        """
+        return self.prompt_manager.get_prompt(agent_type, task_type)
+    
+    def slice_context(self, agent_type: str, full_context: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        上下文切片，只返回Agent有权访问的内容
+        """
+        return self.context_slicer.slice(agent_type, full_context)
+    
+    def check_memory_access(self, agent_type: str, memory_key: str, access_type: str) -> bool:
+        """
+        检查Memory访问权限
+        """
+        return self.memory_acl.check_access(agent_type, memory_key, access_type)
+    
+    def check_tool_access(self, agent_type: str, tool_name: str) -> bool:
+        """
+        检查工具访问权限
+        """
+        return self.tool_acl.check_access(agent_type, tool_name)
+    
+    def validate_step(self, step: Dict[str, Any]) -> bool:
+        """
+        验证步骤是否合法
+        """
+        return self.validator.validate(step)
+    
+    def get_memory(self, agent_type: str, memory_key: str) -> Optional[Any]:
+        """
+        获取Memory内容
+        """
+        if self.check_memory_access(agent_type, memory_key, "read"):
+            return self.memory_hub.struct().get(memory_key)
+        return None
+    
+    def set_memory(self, agent_type: str, memory_key: str, value: Any) -> bool:
+        """
+        设置Memory内容
+        """
+        if self.check_memory_access(agent_type, memory_key, "write"):
+            self.memory_hub.struct().set(memory_key, value)
+            return True
+        return False

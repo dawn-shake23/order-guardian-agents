@@ -1,43 +1,31 @@
-from datetime import datetime, timedelta
-from typing import Optional
-from models.sandbox_memory import AgentSandboxMemory
-from core.quota_manager import SandboxQuota
+from datetime import datetime
+from memory.sandbox.isolation_sandbox import SandboxMeta
 
 class MemoryLifeCycle:
-    # 沙盒创建（自动计算过期时间）
     @staticmethod
-    def create_sandbox(session_id: str, step_id: int, agent_type: str) -> AgentSandboxMemory:
-        created_at = datetime.now()
-        expire_at = created_at + timedelta(minutes=5)
-        return AgentSandboxMemory(
+    def create_sandbox(session_id: str, step_id: int, agent_type: str) -> SandboxMeta:
+        """
+        创建沙箱元数据
+        """
+        return SandboxMeta(
             session_id=session_id,
             step_id=step_id,
             agent_type=agent_type,
-            created_at=created_at,
-            expire_at=expire_at
+            created_at=datetime.now().timestamp()
         )
-
-    # 校验沙盒有效性
+    
     @staticmethod
-    def is_sandbox_valid(sandbox: AgentSandboxMemory, agent_type: str) -> bool:
-        # 权限隔离：仅自身可访问
-        if sandbox.agent_type != agent_type:
-            return False
-        # 过期校验
-        if datetime.now() > sandbox.expire_at:
-            return False
-        # 配额校验
-        if not SandboxQuota.check_quota(sandbox):
-            return False
-        return True
-
-    # 沙盒GC销毁
+    def is_sandbox_expired(sandbox_meta: SandboxMeta, timeout_seconds: int = 3600) -> bool:
+        """
+        检查沙箱是否过期
+        """
+        current_time = datetime.now().timestamp()
+        return current_time - sandbox_meta.created_at > timeout_seconds
+    
     @staticmethod
-    def destroy_sandbox(sandbox: AgentSandboxMemory) -> None:
-        sandbox.private_data.clear()
-        del sandbox
-
-    # 缓存过期校验
-    @staticmethod
-    def is_cache_expired(ttl_seconds: int, created_at: datetime) -> bool:
-        return (datetime.now() - created_at).total_seconds() > ttl_seconds
+    def generate_memory_key(prefix: str, *args) -> str:
+        """
+        生成内存键
+        """
+        parts = [prefix] + [str(arg) for arg in args]
+        return ":".join(parts)

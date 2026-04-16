@@ -1,17 +1,36 @@
-from typing import dict
-from sandbox.isolation_sandbox import IsolatedAgentSandbox
+from typing import Dict, Optional
+from memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
 
 class SandboxPool:
-    def __init__(self, max_pool_size: int = 20):
-        self.pool: dict[str, IsolatedAgentSandbox] = {}
-        self.max_size = max_pool_size
-
-    def acquire(self, key: str, sandbox: IsolatedAgentSandbox) -> None:
-        if len(self.pool) >= self.max_size:
-            raise RuntimeError("sandbox pool overflow")
-        self.pool[key] = sandbox
-
-    def release(self, key: str) -> None:
-        if key in self.pool:
-            self.pool[key].destroy()
-            del self.pool[key]
+    def __init__(self):
+        self.sandboxes: Dict[str, IsolatedAgentSandbox] = {}
+    
+    def acquire(self, key: str, sandbox: IsolatedAgentSandbox) -> bool:
+        """
+         acquire a sandbox into the pool
+        """
+        if key not in self.sandboxes:
+            self.sandboxes[key] = sandbox
+            return True
+        return False
+    
+    def release(self, key: str) -> bool:
+        """
+        Release a sandbox from the pool
+        """
+        if key in self.sandboxes:
+            del self.sandboxes[key]
+            return True
+        return False
+    
+    def get(self, key: str) -> Optional[IsolatedAgentSandbox]:
+        """
+        Get a sandbox from the pool
+        """
+        return self.sandboxes.get(key)
+    
+    def clear(self):
+        """
+        Clear all sandboxes from the pool
+        """
+        self.sandboxes.clear()

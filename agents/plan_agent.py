@@ -1,7 +1,7 @@
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel, Field, field_validator
 from .base_worker import AgentMeta, BaseWorkerAgent, AgentInput, AgentOutput
-from Model.llm_client import LLMClient, ModelType
+from models.llm_client import LLMClient, ModelType
 
 
 # ==========================================================

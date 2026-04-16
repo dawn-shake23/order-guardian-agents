@@ -2,3 +2,13 @@ pydantic>=2.0
 faiss-cpu>=1.7.4
 numpy>=1.24
 pyyaml>=6.0
+# OpenTelemetry for tracing
+opentelemetry-api>=1.20.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-exporter-otlp-proto-http>=1.20.0
+# Redis for memory storage
+redis>=5.0.0
+# MySQL for persistent storage
+mysql-connector-python>=8.0.0
+# Logging
+python-json-logger>=2.0.7

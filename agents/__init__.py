@@ -1,4 +1,4 @@
-from .base_agent import BaseAgent, AgentMeta
+from .base_worker import BaseAgent, AgentMeta
 from .order_agent import OrderAgent
 from .payment_agent import PaymentAgent
 from .risk_agent import RiskAgent

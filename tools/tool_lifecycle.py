@@ -1,30 +1,50 @@
-from Tools.tool_registry import tool_registry
+from typing import Dict, Any
+from memory.memory_hub import MemoryHub
+from .tool_registry import tool_registry
 
 class ToolLifeCycleManager:
-    @staticmethod
-    def global_init(memory_hub):
-        """全局初始化所有工具"""
-        # 注册并初始化DataCarry工具
-        from Tools.DataCarry.memory_rw import MemoryReadWriteTool
-        from Tools.DataCarry.sandbox_rw import SandboxReadWriteTool
-        tool_registry.register_tool("memory_read_write", MemoryReadWriteTool)
-        tool_registry.register_tool("sandbox_read_write", SandboxReadWriteTool)
-
-        # 注册并初始化DeepSearch工具
-        from Tools.DeepSearch.vector_search import VectorSearchTool
-        tool_registry.register_tool("vector_search", VectorSearchTool)
-
-        # 注册并初始化RuleCheck工具
-        from Tools.RuleCheck.acl_check import AgentAclCheckTool
-        tool_registry.register_tool("agent_acl_check", AgentAclCheckTool)
-
-        # 初始化实例
-        tool_registry.init_tool_instance("memory_read_write", memory_hub)
-        tool_registry.init_tool_instance("sandbox_read_write")
-        tool_registry.init_tool_instance("vector_search", memory_hub)
-        tool_registry.init_tool_instance("agent_acl_check")
-
-    @staticmethod
-    def global_destroy():
-        """全局销毁所有工具，释放资源"""
-        tool_registry.destroy_all()
+    _instance = None
+    
+    def __init__(self, memory_hub: MemoryHub):
+        self.memory_hub = memory_hub
+        self.tools_initialized = False
+    
+    @classmethod
+    def global_init(cls, memory_hub: MemoryHub) -> 'ToolLifeCycleManager':
+        """
+        全局初始化工具生命周期管理器
+        """
+        if cls._instance is None:
+            cls._instance = cls(memory_hub)
+            cls._instance._initialize_tools()
+        return cls._instance
+    
+    @classmethod
+    def get_instance(cls) -> 'ToolLifeCycleManager':
+        """
+        获取工具生命周期管理器实例
+        """
+        if cls._instance is None:
+            raise RuntimeError("ToolLifeCycleManager not initialized")
+        return cls._instance
+    
+    def _initialize_tools(self):
+        """
+        初始化所有工具
+        """
+        # 这里应该注册所有工具
+        # 示例：tool_registry.register_tool("tool_name", ToolClass())
+        self.tools_initialized = True
+    
+    def get_tool(self, tool_name: str) -> Any:
+        """
+        获取工具实例
+        """
+        return tool_registry.get_tool(tool_name)
+    
+    def shutdown(self):
+        """
+        关闭所有工具
+        """
+        # 这里应该清理所有工具资源
+        pass

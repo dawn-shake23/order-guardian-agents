@@ -1,17 +1,60 @@
-from typing import List
-from models.vector_memory import VectorDocument
+from typing import List, Dict, Any, Optional
+import faiss
+import numpy as np
 
 class VectorMemoryStore:
     def __init__(self):
-        # 对接Chroma/Pinecone等向量库
-        self.vector_db = {}
-
-    # 存储向量文档
-    def add_vector_doc(self, doc: VectorDocument) -> None:
-        self.vector_db[doc.doc_id] = doc
-
-    # 向量检索（仅接口，MCP管控权限）
-    def search_by_domain(self, query: str, biz_domain: str, top_k: int = 3) -> List[VectorDocument]:
-        # 实际业务中执行向量相似度检索
-        result = [doc for doc in self.vector_db.values() if doc.biz_domain == biz_domain]
-        return result[:top_k]
+        # 实际项目中这里应该初始化真实的向量存储
+        self.embeddings = []
+        self.metadata = []
+        self.dimension = 128  # 假设向量维度为128
+        self.index = faiss.IndexFlatL2(self.dimension)
+    
+    def add(self, embedding: List[float], metadata: Dict[str, Any]) -> bool:
+        """
+        添加向量和元数据
+        """
+        self.embeddings.append(embedding)
+        self.metadata.append(metadata)
+        self.index.add(np.array([embedding], dtype=np.float32))
+        return True
+    
+    def search(self, query_embedding: List[float], k: int = 5) -> List[Dict[str, Any]]:
+        """
+        搜索相似向量
+        """
+        query = np.array([query_embedding], dtype=np.float32)
+        distances, indices = self.index.search(query, k)
+        
+        results = []
+        for i, idx in enumerate(indices[0]):
+            if idx < len(self.metadata):
+                result = {
+                    "metadata": self.metadata[idx],
+                    "distance": float(distances[0][i])
+                }
+                results.append(result)
+        
+        return results
+    
+    def delete(self, index: int) -> bool:
+        """
+        删除向量
+        """
+        if 0 <= index < len(self.embeddings):
+            del self.embeddings[index]
+            del self.metadata[index]
+            # 重建索引
+            self.index = faiss.IndexFlatL2(self.dimension)
+            if self.embeddings:
+                self.index.add(np.array(self.embeddings, dtype=np.float32))
+            return True
+        return False
+    
+    def clear(self):
+        """
+        清空向量存储
+        """
+        self.embeddings = []
+        self.metadata = []
+        self.index = faiss.IndexFlatL2(self.dimension)

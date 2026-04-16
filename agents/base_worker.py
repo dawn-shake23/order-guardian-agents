@@ -1,19 +1,33 @@
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel, Field
 from abc import ABC, abstractmethod
-from Memory.memory_hub import MemoryHub
-from Memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
-from Tools.tool_registry import tool_registry
-from Tools.BaseTool import ToolResult
+from memory.memory_hub import MemoryHub
+from memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
+from tools.tool_registry import tool_registry
+from tools.BaseTool.base_tool import ToolResult
 
 # 专家Agent元信息
 class AgentMeta(BaseModel):
     agent_type: str
     version: str = "1.0.0"
-    allowed_tools: List[str]
+    allowed_tools: List[str] = Field(default_factory=list)
     allowed_memory_access: bool = True
     sandbox_isolated: bool = True
     timeout_seconds: int = 30
+    required_fields: List[str] = Field(default_factory=list)
+    acl_scopes: List[str] = Field(default_factory=list)
+
+# Agent输入
+class AgentInput(BaseModel):
+    session_id: str
+    order_id: str
+    params: Dict[str, Any]
+
+# Agent输出
+class AgentOutput(BaseModel):
+    success: bool
+    data: Dict[str, Any]
+    error: Optional[str] = None
 
 # 所有专家Agent的父类
 class BaseAgent(ABC):
@@ -70,3 +84,15 @@ class BaseAgent(ABC):
                 self.meta.agent_type
             )
         self.initialized = False
+
+# BaseWorkerAgent类，用于Coordinator和PlanAgent
+class BaseWorkerAgent(BaseAgent):
+    def __init__(self, meta: AgentMeta):
+        # 注意：这里简化处理，实际应该传入memory_hub
+        super().__init__(meta, MemoryHub())
+    
+    def execute(self, agent_input: AgentInput) -> Dict[str, Any]:
+        """
+        执行Agent任务
+        """
+        raise NotImplementedError
