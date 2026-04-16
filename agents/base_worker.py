@@ -1,114 +1,72 @@
-from pydantic import BaseModel, Field, field_validator
 from typing import Dict, Any, Optional, List
+from pydantic import BaseModel, Field
 from abc import ABC, abstractmethod
-import time
+from Memory.memory_hub import MemoryHub
+from Memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
+from Tools.tool_registry import tool_registry
+from Tools.BaseTool import ToolResult
 
-
-# ==========================
-# 1. 真正强校验：统一元数据（带字段校验）
-# ==========================
+# 专家Agent元信息
 class AgentMeta(BaseModel):
-    """统一元数据：贯穿调度、监控、审计（风控级强校验）"""
     agent_type: str
-    version: str = Field(default="1.0.0", min_length=3, max_length=20)
-    timeout_seconds: int = Field(default=15, ge=1, le=60)
-    required_fields: List[str]
-    acl_scopes: List[str]
+    version: str = "1.0.0"
+    allowed_tools: List[str]
+    allowed_memory_access: bool = True
+    sandbox_isolated: bool = True
+    timeout_seconds: int = 30
 
-    # 强校验：agent_type 不允许为空
-    @field_validator('agent_type')
-    def agent_type_not_empty(cls, v):
-        if not v or len(v.strip()) == 0:
-            raise ValueError("agent_type 不能为空")
-        return v.strip()
+# 所有专家Agent的父类
+class BaseAgent(ABC):
+    def __init__(self, meta: AgentMeta, memory_hub: MemoryHub):
+        self.meta = meta
+        self.memory_hub = memory_hub
+        self.sandbox: Optional[IsolatedAgentSandbox] = None
+        self.initialized = False
 
-
-# ==========================
-# 2. 真正强校验：统一入参模型
-# ==========================
-class AgentInput(BaseModel):
-    """Agent 入参强校验模型"""
-    session_id: str
-    task_id: str
-    order_id: str
-    params: Dict[str, Any]
-
-    @field_validator('session_id', 'task_id', 'order_id')
-    def id_not_empty(cls, v):
-        if not v:
-            raise ValueError("唯一标识不能为空")
-        return v
-
-
-# ==========================
-# 3. 真正强校验：统一出参模型
-# ==========================
-class AgentOutput(BaseModel):
-    """Agent 出参强校验模型（审计、风控、Coordinator 必须）"""
-    agent_type: str
-    session_id: str
-    success: bool
-    message: str
-    data: Optional[Dict[str, Any]] = None
-    error: Optional[str] = None
-    cost_ms: int
-    meta: AgentMeta
-
-
-# ==========================
-# 4. 基类：全链路 Pydantic 强校验
-# ==========================
-class BaseWorkerAgent(ABC):
-    """
-    所有专家 Agent 基类
-    对齐 Claude Code 工程规范
-    全链路 Pydantic 强校验
-    无状态、无记忆、可审计
-    """
-
-    def __init__(self, meta: AgentMeta):
-        self._meta = meta
-
-    @property
-    def meta(self) -> AgentMeta:
-        return self._meta
-
-    # ==============================================
-    # 真正强校验入口：接收 Pydantic 模型，不是字典
-    # ==============================================
-    def run(self, agent_input: AgentInput) -> AgentOutput:
-        start = time.time()
-        try:
-            # 1. 强校验（Pydantic 自动完成）
-            # 2. 业务执行
-            result = self.execute(agent_input)
-
-            # 3. 构建标准输出
-            return AgentOutput(
-                agent_type=self._meta.agent_type,
-                session_id=agent_input.session_id,
-                success=True,
-                message="执行成功",
-                data=result,
-                cost_ms=int((time.time() - start) * 1000),
-                meta=self._meta
+    # 初始化：创建沙盒
+    def initialize(self, session_id: str, step_id: int) -> None:
+        if self.initialized:
+            return
+        if self.meta.sandbox_isolated:
+            self.sandbox = self.memory_hub.create_sandbox(
+                session_id=session_id,
+                step_id=step_id,
+                agent_type=self.meta.agent_type
             )
+        self.initialized = True
 
-        except Exception as e:
-            # 异常标准化（风控必须）
-            return AgentOutput(
-                agent_type=self._meta.agent_type,
-                session_id=agent_input.session_id,
+    # 统一工具调用（MCP 授权后才能调用）
+    def call_tool(self, tool_name: str, params: Dict[str, Any]) -> ToolResult:
+        if not self.initialized:
+            raise RuntimeError("Agent未初始化")
+
+        # 工具权限校验
+        if tool_name not in self.meta.allowed_tools:
+            return ToolResult(
+                tool_name=tool_name,
                 success=False,
-                error=str(e),
-                cost_ms=int((time.time() - start) * 1000),
-                meta=self._meta
+                error_msg="该Agent无此工具权限",
+                agent_type=self.meta.agent_type
             )
 
+        tool = tool_registry.get_tool(tool_name)
+        return tool.execute(
+            agent_type=self.meta.agent_type,
+            params=params,
+            sandbox=self.sandbox
+        )
+
+    # 专家核心执行逻辑
     @abstractmethod
-    def execute(self, agent_input: AgentInput) -> Dict[str, Any]:
-        """
-        子类必须实现
-        入参出参全部强校验
-        """
+    def run(self, input_context: Dict[str, Any]) -> Dict[str, Any]:
         pass
+
+    # 销毁：清理沙盒
+    def destroy(self) -> None:
+        if self.sandbox:
+            self.memory_hub.destroy_sandbox(
+                self.sandbox.meta.session_id,
+                self.sandbox.meta.step_id,
+                self.meta.agent_type
+            )
+        self.initialized = False
