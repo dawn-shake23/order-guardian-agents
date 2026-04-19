@@ -69,6 +69,7 @@ class Coordinator(BaseWorkerAgent):
 
         # 3. 按步骤分发（MCP 负责权限、Prompt、上下文、工具）
         step_results = []
+        has_failed_step = False
         for step in plan.steps:
             self.logger.info("执行步骤", extra={"step_id": step.step_id, "expert_type": step.expert_type, "goal": step.goal})
             # 获取对应的Agent
@@ -78,7 +79,9 @@ class Coordinator(BaseWorkerAgent):
                 agent.initialize(plan.session_id, step.step_id)
                 try:
                     result = agent.run({
-                        "step": step,
+                        "session_id": plan.session_id,
+                        "order_id": plan.order_id,
+                        "step": step.model_dump(),
                         "context": global_context
                     })
                     step_results.append({
@@ -90,6 +93,7 @@ class Coordinator(BaseWorkerAgent):
                     })
                     self.logger.info("步骤执行完成", extra={"step_id": step.step_id, "expert_type": step.expert_type})
                 except AgentError as e:
+                    has_failed_step = True
                     self.logger.error("Agent执行错误", extra={"step_id": step.step_id, "expert_type": step.expert_type, "error_code": e.error_code.value, "message": e.message})
                     step_results.append({
                         "step_id": step.step_id,
@@ -99,6 +103,7 @@ class Coordinator(BaseWorkerAgent):
                         "error": f"AgentError: {e.error_code.value} - {e.message}"
                     })
                 except ToolError as e:
+                    has_failed_step = True
                     self.logger.error("工具执行错误", extra={"step_id": step.step_id, "expert_type": step.expert_type, "error_code": e.error_code.value, "message": e.message})
                     step_results.append({
                         "step_id": step.step_id,
@@ -108,6 +113,7 @@ class Coordinator(BaseWorkerAgent):
                         "error": f"ToolError: {e.error_code.value} - {e.message}"
                     })
                 except Exception as e:
+                    has_failed_step = True
                     self.logger.error("步骤执行异常", extra={"step_id": step.step_id, "expert_type": step.expert_type, "error": str(e)}, exc_info=True)
                     step_results.append({
                         "step_id": step.step_id,
@@ -119,6 +125,7 @@ class Coordinator(BaseWorkerAgent):
                 finally:
                     agent.destroy()
             else:
+                has_failed_step = True
                 error_msg = f"Agent {step.expert_type} not found"
                 step_results.append({
                     "step_id": step.step_id,
@@ -131,12 +138,13 @@ class Coordinator(BaseWorkerAgent):
 
         # 4. 强模型生成最终决策
         self.logger.info("生成最终决策", extra={"session_id": plan.session_id})
-        final_report = self._make_final_decision(global_context, step_results, plan)
+        plan_success = not has_failed_step
+        final_report = self._make_final_decision(global_context, step_results, plan, plan_success)
 
         self.logger.info("任务执行完成", extra={"session_id": plan.session_id, "plan_success": final_report.plan_success})
         return final_report.model_dump()
 
-    def _make_final_decision(self, context: Dict, steps: List[Dict], plan: ExecutionPlan) -> FinalConsultReport:
+    def _make_final_decision(self, context: Dict, steps: List[Dict], plan: ExecutionPlan, plan_success: bool) -> FinalConsultReport:
         prompt = f"""
 会话：{context['session_id']}
 订单：{context['order_id']}
@@ -147,4 +155,17 @@ class Coordinator(BaseWorkerAgent):
 请输出根因、方案、风险等级、最终总结。
 """
         raw = self.llm.generate(prompt, output_schema=FinalConsultReport)
-        return FinalConsultReport(**raw["data"])
+        raw_data = raw.get("data", {})
+        raw_data["session_id"] = plan.session_id
+        raw_data["order_id"] = plan.order_id
+        raw_data["plan_success"] = plan_success
+        raw_data["expert_steps"] = steps
+        if "risk_level" not in raw_data:
+            raw_data["risk_level"] = plan.global_analysis.abnormal_level
+        if "abnormal_root_cause" not in raw_data:
+            raw_data["abnormal_root_cause"] = "自动根因分析"
+        if "solution" not in raw_data:
+            raw_data["solution"] = "自动解决方案"
+        if "final_summary" not in raw_data:
+            raw_data["final_summary"] = "自动总结"
+        return FinalConsultReport(**raw_data)

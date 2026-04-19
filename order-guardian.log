@@ -49,3 +49,236 @@
 {"timestamp": "2026-04-16T14:03:21.042255", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
 {"timestamp": "2026-04-16T14:03:21.042255", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
 {"timestamp": "2026-04-16T14:03:21.043788", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.059752", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.060752", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.064797", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.066145", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.066145", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.066652", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.067671", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.067671", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.067671", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.068699", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.068699", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.070662", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.070662", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.072709", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\order_agent.py\", line 19, in run\n    \"session_id\": input_context[\"session_id\"]\n                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^\nKeyError: 'session_id'"}
+{"timestamp": "2026-04-16T14:12:48.073722", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.075721", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\payment_agent.py\", line 14, in run\n    search_result = self.call_tool(\n                    ^^^^^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-16T14:12:48.076727", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.077803", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\risk_agent.py\", line 14, in run\n    acl_result = self.call_tool(\n                 ^^^^^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-16T14:12:48.078782", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.079781", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.079781", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.080290", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.080290", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.081302", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:12:48.082306", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.347352", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.348353", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.352414", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.352414", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.352414", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.353413", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.353926", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.354468", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.354468", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.355483", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.355483", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.356480", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.356480", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.357673", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\order_agent.py\", line 19, in run\n    \"session_id\": input_context[\"session_id\"]\n                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^\nKeyError: 'session_id'"}
+{"timestamp": "2026-04-16T14:21:45.358672", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.361654", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\payment_agent.py\", line 14, in run\n    search_result = self.call_tool(\n                    ^^^^^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-16T14:21:45.362671", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.364184", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\risk_agent.py\", line 14, in run\n    acl_result = self.call_tool(\n                 ^^^^^^^^^^^^^^^\n  File \"d:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-16T14:21:45.365736", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.365736", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.365736", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.365736", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.366738", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.367250", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-16T14:21:45.367250", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.948649", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.948649", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.954307", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.955677", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.955677", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.955677", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.977123", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.978142", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.978142", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.979138", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.980648", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.981661", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.981661", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.985454", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\order_agent.py\", line 19, in run\n    \"session_id\": input_context[\"session_id\"]\n                  ~~~~~~~~~~~~~^^^^^^^^^^^^^^\nKeyError: 'session_id'"}
+{"timestamp": "2026-04-18T03:45:03.985454", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.987968", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\payment_agent.py\", line 14, in run\n    search_result = self.call_tool(\n                    ^^^^^^^^^^^^^^^\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-18T03:45:03.988982", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.991016", "level": "ERROR", "message": "\u6b65\u9aa4\u6267\u884c\u5f02\u5e38", "module": "logger", "function": "error", "line": 54, "exc_info": "Traceback (most recent call last):\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\coordinator.py\", line 80, in execute\n    result = agent.run({\n             ^^^^^^^^^^^\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\risk_agent.py\", line 14, in run\n    acl_result = self.call_tool(\n                 ^^^^^^^^^^^^^^^\n  File \"D:\\code\\aigent\\order_gardian\\order-guardian-agents\\agents\\base_worker.py\", line 67, in call_tool\n    return tool.execute(\n           ^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'execute'"}
+{"timestamp": "2026-04-18T03:45:03.991546", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.991546", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.993080", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.993080", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.993080", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.995094", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:45:03.995094", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.446217", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.447227", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.453547", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.453547", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.454565", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.455083", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.474041", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.474041", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.475041", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.475041", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.475041", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.476219", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.476219", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.892627", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.892627", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.892627", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.893645", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.893645", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.893645", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.894638", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.894638", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.894638", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.895869", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.895869", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-18T03:49:31.896881", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.572083", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.572083", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.604063", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.625494", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.648164", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.648164", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.671482", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.671482", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.671482", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.673034", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.675561", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.676094", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.676094", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.676094", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.677107", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.677107", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.678110", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.679113", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.680110", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.680623", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:11.680623", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.113092", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.113092", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.113092", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.114639", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.114639", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.114639", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.115662", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.115662", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.115662", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.116663", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.116663", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.116663", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.117664", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.118664", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.118664", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.120170", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.121714", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.121714", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.121714", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.123864", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.123864", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.124864", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.124864", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.124864", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.126190", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.126190", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.127194", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.127194", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.127194", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.128193", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.128193", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.129189", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.129189", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.129189", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.130193", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.130193", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.130705", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.130705", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.131236", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.131236", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.131236", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.132862", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.132862", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.133883", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.133883", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.133883", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.133883", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.135393", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:30:12.135393", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.388128", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.388128", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.393163", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.417274", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.449601", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.478567", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.507131", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.507712", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.507712", "level": "INFO", "message": "\u5f00\u59cb\u521d\u59cb\u5316\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.508349", "level": "INFO", "message": "\u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.510908", "level": "INFO", "message": "\u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.510908", "level": "INFO", "message": "\u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.510908", "level": "INFO", "message": "\u521d\u59cb\u5316 MCP \u63a7\u5236\u5e73\u9762", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.510908", "level": "INFO", "message": "\u521d\u59cb\u5316 Coordinator", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.512421", "level": "INFO", "message": "\u6ce8\u518c\u4e13\u5bb6 Agent", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.512421", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.513029", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u591a\u4e13\u5bb6\u534f\u540c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.513029", "level": "INFO", "message": "\u542f\u52a8 Coordinator \u8c03\u5ea6", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.513029", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.514047", "level": "INFO", "message": "\u6784\u5efa\u5168\u5c40\u4e0a\u4e0b\u6587", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.514047", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.533388", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.534401", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.534401", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.535408", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.535408", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.535408", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.536401", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.536401", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.537409", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.537409", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.537409", "level": "INFO", "message": "\u6267\u884c\u6b65\u9aa4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.537409", "level": "INFO", "message": "\u6b65\u9aa4\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.539172", "level": "INFO", "message": "\u751f\u6210\u6700\u7ec8\u51b3\u7b56", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.539926", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.539926", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210\uff0c\u751f\u6210\u6700\u7ec8\u62a5\u544a", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.540946", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.540946", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.541943", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.541943", "level": "INFO", "message": "\u53cc\u5e93\u540c\u6b65\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.542943", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.542943", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.544060", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.544060", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.544060", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.545068", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.545068", "level": "INFO", "message": "\u8fc7\u6ee4\u566a\u58f0\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.546058", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.550211", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.551229", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.551229", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.551229", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.551229", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.552746", "level": "INFO", "message": "\u9884\u8fc7\u6ee4\u540e\u65e0\u5019\u9009\u6587\u6863", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.553758", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.553758", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.553758", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.554768", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.554768", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.555760", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.555760", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.555760", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T02:31:10.557277", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}

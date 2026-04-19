@@ -64,6 +64,13 @@ class BaseAgent(ABC):
             )
 
         tool = tool_registry.get_tool(tool_name)
+        if tool is None:
+            return ToolResult(
+                tool_name=tool_name,
+                success=False,
+                error_msg=f"工具 {tool_name} 未注册或未初始化",
+                agent_type=self.meta.agent_type
+            )
         return tool.execute(
             agent_type=self.meta.agent_type,
             params=params,

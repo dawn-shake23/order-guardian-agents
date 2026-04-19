@@ -156,9 +156,120 @@ def run_demo_task():
     print(f"解决方案: {final_report['solution']}")
     print(f"总结: {final_report['final_summary']}")
 
+def run_rag_demo(memory_hub: MemoryHub):
+    """运行RAG增强功能演示"""
+    import numpy as np
+    from memory.storage.sync_manager import DataSyncManager, SyncOperation
+    from tools.DeepSearch.deep_search import DeepSearchEngine, DeepSearchQuery
+    from tools.DeepSearch.rag_pipeline import RAGPipeline
+    from agents.rag_orchestrator import AgentRAGOrchestrator, ToolDecision
+
+    print("\n" + "=" * 60)
+    print("  RAG 增强功能演示")
+    print("=" * 60)
+
+    # ---- 1. 双库一致性演示 ----
+    print("\n--- 1. 双库一致性：DataSyncManager ---")
+    sync = memory_hub.sync()
+
+    mock_embedding = np.random.rand(128).tolist()
+    record = sync.insert(
+        table="documents",
+        doc_id="DOC001",
+        data={"title": "支付掉单处理规范", "content": "当支付回调未到达时...", "biz_domain": "payment"},
+        embedding=mock_embedding,
+        metadata={"doc_id": "DOC001", "table": "documents"}
+    )
+    print(f"  插入同步结果: status={record.status.value}, record_id={record.record_id}")
+
+    record = sync.soft_delete(table="documents", doc_id="DOC001", data={"title": "支付掉单处理规范", "content": "已过期"})
+    print(f"  软删同步结果: status={record.status.value}")
+
+    comp_status = sync.get_compensation_status()
+    print(f"  补偿队列状态: pending={comp_status['pending_count']}")
+
+    # ---- 2. 混合检索演示 ----
+    print("\n--- 2. 混合检索：业务字段预过滤 + 向量检索 ---")
+    hybrid = memory_hub.hybrid()
+
+    memory_hub.struct_mysql.save("documents", "DOC002", {
+        "doc_id": "DOC002", "title": "订单超时处理", "content": "订单超过30分钟未支付自动关闭",
+        "biz_domain": "order", "is_deleted": False, "is_archived": False
+    })
+    memory_hub.vector_store.add(np.random.rand(128).tolist(), {
+        "doc_id": "DOC002", "title": "订单超时处理", "content": "订单超过30分钟未支付自动关闭",
+        "biz_domain": "order"
+    })
+
+    results = hybrid.search_with_filter(
+        query_embedding=np.random.rand(128).tolist(),
+        biz_domain="order",
+        top_k=3
+    )
+    print(f"  混合检索结果数: {len(results)}")
+    for r in results:
+        print(f"    - {r.get('metadata', {}).get('title', 'N/A')} (distance={r.get('distance', 'N/A')})")
+
+    # ---- 3. DeepSearch演示 ----
+    print("\n--- 3. DeepSearch：多路召回 + RRF融合 + 粗排精排 ---")
+    deep_search = DeepSearchEngine(hybrid)
+
+    ds_query = DeepSearchQuery(
+        raw_query="过去30天支付域掉单案例",
+        biz_domain="payment",
+        require_cross_validation=True,
+        top_k=3
+    )
+    ds_results = deep_search.search(ds_query)
+    print(f"  DeepSearch结果数: {len(ds_results)}")
+    for r in ds_results:
+        print(f"    - [{r.doc_id}] {r.title} (score={r.score:.4f}, validated={r.validated}, routes={r.source_route})")
+
+    # ---- 4. RAG流水线演示 ----
+    print("\n--- 4. RAG增强：噪声过滤 + 上下文压缩 + 结构化Prompt ---")
+    rag = RAGPipeline(max_context_tokens=4000)
+
+    mock_search_results = [
+        {"metadata": {"doc_id": "D1", "title": "支付掉单处理", "content": "当支付回调未到达时，需要手动查询渠道状态并补偿", "biz_domain": "payment"}, "score": 0.8},
+        {"metadata": {"doc_id": "D2", "title": "订单超时规则", "content": "订单超过30分钟未支付自动关闭", "biz_domain": "order"}, "score": 0.3},
+        {"metadata": {"doc_id": "D3", "title": "风控评分标准", "content": "高风险订单需要人工审核", "biz_domain": "risk"}, "score": 0.1},
+    ]
+    rag_prompt = rag.process(mock_search_results, "支付掉单怎么处理", biz_domain="payment")
+    print(f"  RAG Prompt长度: {len(rag_prompt)} 字符")
+    print(f"  Prompt前200字: {rag_prompt[:200]}...")
+
+    # ---- 5. Agent+RAG联动演示 ----
+    print("\n--- 5. Agent+RAG联动：工具调用决策 + 记忆路由 ---")
+    orchestrator = AgentRAGOrchestrator(
+        memory_hub,
+        deep_search_engine=deep_search,
+        rag_pipeline=rag
+    )
+
+    test_queries = [
+        ("payment", "过去30天支付域掉单案例"),
+        ("order", "查询订单状态"),
+        ("risk", "是"),
+    ]
+
+    for agent_type, query in test_queries:
+        result = orchestrator.orchestrate(
+            agent_type=agent_type,
+            query=query,
+            session_id="demo_session",
+            order_id="ORD00001"
+        )
+        print(f"  [{agent_type}] '{query}' → action={result['action']}, reason={result['reason']}")
+
+    print("\n" + "=" * 60)
+    print("  RAG 增强功能演示完成")
+    print("=" * 60)
+
 if __name__ == "__main__":
     try:
+        coordinator, mcp, memory_hub, agent_map = init_system()
         run_demo_task()
+        run_rag_demo(memory_hub)
     except OrderGuardianError as e:
         logger.error(f"OrderGuardianError: {e.error_code.value} - {e.message}", extra=e.extra)
     except Exception as e:

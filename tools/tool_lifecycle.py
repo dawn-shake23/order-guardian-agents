@@ -1,6 +1,11 @@
 from typing import Dict, Any
 from memory.memory_hub import MemoryHub
-from .tool_registry import tool_registry
+from tools.tool_registry import tool_registry
+from tools.DataCarry.memory_rw import MemoryReadWriteTool
+from tools.DataCarry.sandbox_rw import SandboxReadWriteTool
+from tools.DataCarry.struct_search import StructSearchTool
+from tools.DeepSearch.vector_search import VectorSearchTool
+from tools.RuleCheck.acl_check import AgentAclCheckTool
 
 class ToolLifeCycleManager:
     _instance = None
@@ -11,9 +16,6 @@ class ToolLifeCycleManager:
     
     @classmethod
     def global_init(cls, memory_hub: MemoryHub) -> 'ToolLifeCycleManager':
-        """
-        全局初始化工具生命周期管理器
-        """
         if cls._instance is None:
             cls._instance = cls(memory_hub)
             cls._instance._initialize_tools()
@@ -21,30 +23,20 @@ class ToolLifeCycleManager:
     
     @classmethod
     def get_instance(cls) -> 'ToolLifeCycleManager':
-        """
-        获取工具生命周期管理器实例
-        """
         if cls._instance is None:
             raise RuntimeError("ToolLifeCycleManager not initialized")
         return cls._instance
     
     def _initialize_tools(self):
-        """
-        初始化所有工具
-        """
-        # 这里应该注册所有工具
-        # 示例：tool_registry.register_tool("tool_name", ToolClass())
+        tool_registry.register_tool("memory_read_write", MemoryReadWriteTool(self.memory_hub))
+        tool_registry.register_tool("vector_search", VectorSearchTool(self.memory_hub))
+        tool_registry.register_tool("struct_search", StructSearchTool(self.memory_hub))
+        tool_registry.register_tool("agent_acl_check", AgentAclCheckTool())
+        tool_registry.register_tool("sandbox_read_write", SandboxReadWriteTool())
         self.tools_initialized = True
     
     def get_tool(self, tool_name: str) -> Any:
-        """
-        获取工具实例
-        """
         return tool_registry.get_tool(tool_name)
     
     def shutdown(self):
-        """
-        关闭所有工具
-        """
-        # 这里应该清理所有工具资源
         pass

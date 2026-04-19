@@ -1,6 +1,8 @@
 from memory.storage.structured.redis_client import RedisMemoryClient
 from memory.storage.structured.mysql_repo import MySQLMemoryRepo
 from memory.storage.vector.vector_store import VectorMemoryStore
+from memory.storage.sync_manager import DataSyncManager
+from memory.storage.hybrid_search import HybridSearchEngine
 from memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
 from memory.sandbox.sandbox_pool import SandboxPool
 from memory.cache.breakpoint import BreakpointManager
@@ -12,6 +14,12 @@ class MemoryHub:
         self.struct_redis = RedisMemoryClient()
         self.struct_mysql = MySQLMemoryRepo()
         self.vector_store = VectorMemoryStore()
+
+        # 双库一致性管理器
+        self.sync_manager = DataSyncManager(self.struct_mysql, self.vector_store)
+
+        # 混合检索引擎
+        self.hybrid_search = HybridSearchEngine(self.vector_store, self.struct_mysql)
 
         # 沙盒与缓存
         self.sandbox_pool = SandboxPool()
@@ -39,6 +47,14 @@ class MemoryHub:
 
     def vector(self) -> VectorMemoryStore:
         return self.vector_store
+
+    # 双库一致性出口
+    def sync(self) -> DataSyncManager:
+        return self.sync_manager
+
+    # 混合检索出口
+    def hybrid(self) -> HybridSearchEngine:
+        return self.hybrid_search
 
     # 断点与缓存
     def breakpoint(self) -> BreakpointManager:

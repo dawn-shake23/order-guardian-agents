@@ -10,29 +10,18 @@ class ModelType(Enum):
 class LLMClient:
     def __init__(self, model_type: ModelType = ModelType.QWEN_14B):
         self.model_type = model_type
-        # 实际项目中这里应该初始化真实的LLM客户端
 
     def generate(self, prompt: str, output_schema: Optional[Any] = None) -> Dict[str, Any]:
-        """
-        生成LLM响应
-        实际项目中这里应该调用真实的LLM API
-        """
-        # 模拟LLM响应
         mock_response = {
             "data": {
-                "session_id": "test_session",
-                "order_id": "test_order",
-                "plan_success": True,
-                "abnormal_root_cause": "模拟根因分析",
-                "solution": "模拟解决方案",
+                "abnormal_root_cause": "支付渠道回调延迟，导致订单状态与支付状态不一致",
+                "solution": "1. 联系支付渠道确认回调状态；2. 如确认支付成功，手动更新订单状态；3. 建议增加回调超时补偿机制",
                 "risk_level": "low",
-                "expert_steps": [],
-                "final_summary": "模拟总结"
+                "final_summary": "订单支付状态待确认，经多专家协同诊断，根因为支付渠道回调延迟，建议增加补偿机制"
             }
         }
         
         if output_schema:
-            # 这里应该根据output_schema进行验证和转换
             pass
         
         return mock_response

@@ -1,35 +1,23 @@
 from typing import Dict, Any, Optional
-from Tools.BaseTool import BaseTool, ToolMeta
-from MCP.acl.acl_matrix import AGENT_ACL
+from tools.BaseTool.base_tool import BaseTool, ToolResult
+
+AGENT_ACL = {
+    "coordinator": {"tools": ["memory_read_write", "vector_search", "struct_search", "agent_acl_check"], "fields": ["*"]},
+    "order": {"tools": ["memory_read_write", "vector_search", "struct_search"], "fields": ["order_id", "status", "amount"]},
+    "payment": {"tools": ["memory_read_write", "vector_search", "struct_search"], "fields": ["payment_id", "status", "amount"]},
+    "risk": {"tools": ["memory_read_write", "vector_search", "agent_acl_check"], "fields": ["risk_score", "risk_level"]},
+    "reconciliation": {"tools": ["memory_read_write", "vector_search", "struct_search"], "fields": ["order_amount", "payment_amount"]},
+    "operation": {"tools": ["sandbox_read_write"], "fields": ["suggestion", "priority"]},
+}
 
 class AgentAclCheckTool(BaseTool):
     def __init__(self):
-        meta = ToolMeta(
-            tool_name="agent_acl_check",
-            tool_description="Agent权限校验，校验工具/字段/操作访问权限",
-            input_schema={
-                "agent_type": "str",
-                "check_type": "tool/field",
-                "target": "str"
-            },
-            output_schema={
-                "has_permission": "bool"
-            },
-            allowed_agent_types=["coordinator", "mcp"],
-            need_sandbox=False
-        )
-        super().__init__(meta)
+        super().__init__()
 
-    def _on_initialize(self) -> None:
-        pass
-
-    def _pre_check_logic(self, agent_type: str, params: Dict[str, Any]) -> bool:
-        return all(k in params for k in ["agent_type", "check_type", "target"])
-
-    def _execute_logic(self, agent_type: str, params: Dict[str, Any], sandbox: Optional[Any]) -> Dict[str, Any]:
-        target_agent = params["agent_type"]
-        check_type = params["check_type"]
-        target = params["target"]
+    def _run(self, params: Dict[str, Any], sandbox: Optional[Any] = None) -> Dict[str, Any]:
+        target_agent = params.get("agent_type", "")
+        check_type = params.get("check_type", "tool")
+        target = params.get("target", "")
         if target_agent not in AGENT_ACL:
             return {"has_permission": False}
         if check_type == "tool":
