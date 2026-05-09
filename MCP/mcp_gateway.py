@@ -1,5 +1,5 @@
 from typing import Dict, Any, Optional
-from memory.memory_hub import MemoryHub
+from Memory.memory_hub import MemoryHub
 from MCP.acl.acl_matrix import ACLMatrix
 from MCP.prompt_manager.prompts import PromptManager
 from MCP.context_manager.slicer import ContextSlicer

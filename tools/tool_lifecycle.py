@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from memory.memory_hub import MemoryHub
+from Memory.memory_hub import MemoryHub
 from .tool_registry import tool_registry
 
 class ToolLifeCycleManager:

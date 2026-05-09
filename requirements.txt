@@ -2,7 +2,11 @@ pydantic>=2.0
 faiss-cpu>=1.7.4
 numpy>=1.24
 pyyaml>=6.0
-# OpenTelemetry for tracing
+# LangSmith & LangChain — 可观测性 / 链路追踪
+langsmith>=0.3.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+# OpenTelemetry for tracing (保留作为补充导出器)
 opentelemetry-api>=1.20.0
 opentelemetry-sdk>=1.20.0
 opentelemetry-exporter-otlp-proto-http>=1.20.0
@@ -12,3 +16,5 @@ redis>=5.0.0
 mysql-connector-python>=8.0.0
 # Logging
 python-json-logger>=2.0.7
+# env 管理
+python-dotenv>=1.0.0

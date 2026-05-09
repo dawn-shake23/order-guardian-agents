@@ -18,6 +18,11 @@ build/
 *.swp
 *.swo
 
+# Env & Secrets
+.env
+.env.local
+.env.*.local
+
 # Data
 *.json
 *.csv

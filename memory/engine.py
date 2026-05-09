@@ -1,7 +1,7 @@
 # memory/engine.py
-from memory.cache.ca_cache import CACache
-from memory.performer.worker import MemoryPerformer
-from memory.storage.engine import ShortTermStorage, MidTermStorage, LongTermStorage
+from Memory.cache.ca_cache import CACache
+from Memory.performer.worker import MemoryPerformer
+from Memory.storage.engine import ShortTermStorage, MidTermStorage, LongTermStorage
 
 class MemoryEngine:
     """
