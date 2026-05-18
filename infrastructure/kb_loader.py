@@ -6,6 +6,7 @@ Knowledge Base Loader — 知识库加载器
 - SHA-256 内容去重
 - 批量加载 + 失败补偿重试
 """
+import os
 import time
 import hashlib
 from enum import Enum
@@ -239,6 +240,101 @@ class KnowledgeBaseLoader:
             self._update_vector_status(case_id, VectorStatus.FAILED, str(e))
             self._stats.failed += 1
             return False
+
+    def load_files(self, file_paths: List[str], biz_domain: str = "order",
+                   multimodal_processor=None) -> Dict[str, Any]:
+        """
+        从文件加载知识库（支持多模态：图片/PDF/文本）
+        借鉴 Java KnowledgeBaseUploadService.uploadKnowledgeBase()
+        """
+        file_stats = {"images": 0, "pdfs": 0, "texts": 0, "failed": 0}
+        start_time = time.time()
+
+        if multimodal_processor is None:
+            from memory.multimodal import MultimodalProcessor
+            multimodal_processor = MultimodalProcessor(embedding_provider=self.embedding)
+
+        for file_path in file_paths:
+            if not os.path.exists(file_path):
+                self.logger.error("文件不存在", extra={"path": file_path})
+                file_stats["failed"] += 1
+                continue
+
+            import os as _os
+            fname = _os.path.basename(file_path)
+            doc_id = hashlib.md5(file_path.encode()).hexdigest()[:12]
+
+            try:
+                # 内容哈希去重
+                with open(file_path, "rb") as f:
+                    file_hash = hashlib.sha256(f.read()).hexdigest()
+                if file_hash in self._content_hashes:
+                    self._stats.skipped_duplicate += 1
+                    continue
+                self._content_hashes[file_hash] = doc_id
+
+                # 多模态处理
+                doc = multimodal_processor.process_file(
+                    file_path=file_path,
+                    doc_id=doc_id,
+                    title=fname,
+                    biz_domain=biz_domain
+                )
+
+                # 写入向量库
+                if doc.embedding:
+                    meta = {
+                        "doc_id": doc_id, "title": doc.title,
+                        "content": doc.full_text,
+                        "biz_domain": biz_domain, "doc_type": doc.media_type.value,
+                        "media_type": doc.media_type.value,
+                        "source_file": fname,
+                    }
+                    meta.update(doc.metadata)
+                    self.memory_hub.vector_store.add(doc.embedding, meta)
+
+                # 写入结构化库
+                struct_data = {
+                    "doc_id": doc_id, "title": doc.title,
+                    "content": doc.full_text,
+                    "biz_domain": biz_domain,
+                    "doc_type": doc.media_type.value,
+                    "media_type": doc.media_type.value,
+                    "source_file": fname,
+                    "file_hash": file_hash,
+                    "vector_status": VectorStatus.COMPLETED.value,
+                    "created_at": time.time(),
+                    "is_deleted": False,
+                }
+                self.memory_hub.struct_mysql.save("documents", doc_id, struct_data)
+
+                if doc.media_type.value == "image":
+                    file_stats["images"] += 1
+                elif doc.media_type.value == "pdf":
+                    file_stats["pdfs"] += 1
+                else:
+                    file_stats["texts"] += 1
+
+                self._stats.documents += 1
+
+            except Exception as e:
+                self.logger.error("文件加载失败", extra={"path": fname, "error": str(e)})
+                file_stats["failed"] += 1
+
+        elapsed = (time.time() - start_time) * 1000
+        self.logger.info("文件加载完成", extra={
+            **file_stats,
+            "duration_ms": round(elapsed, 2)
+        })
+
+        return {
+            "status": "ok",
+            "images": file_stats["images"],
+            "pdfs": file_stats["pdfs"],
+            "texts": file_stats["texts"],
+            "failed": file_stats["failed"],
+            "duration_ms": round(elapsed, 2),
+        }
 
     def add_document(self, doc_id: str, title: str, content: str,
                      biz_domain: str, doc_type: str = "rule") -> bool:
