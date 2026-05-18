@@ -1,4 +1,5 @@
 import uuid
+import os
 import time
 import json
 from memory.memory_hub import MemoryHub
@@ -32,6 +33,44 @@ from core.errors import OrderGuardianError
 logger = get_logger("main")
 
 
+def _load_business_data(mock_db, mock_rag):
+    """加载业务数据：优先从 data/*.json 批量加载，否则用内置小数据集"""
+    data_dir = "./data"
+    json_files = {
+        "orders": "orders.json", "payments": "payments.json",
+        "risks": "risks.json", "reconciliations": "reconciliations.json",
+    }
+
+    for table, fname in json_files.items():
+        path = os.path.join(data_dir, fname)
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                records = json.load(f)
+            for pk, record in records.items():
+                mock_db.insert(table, pk, record)
+            logger.info(f"  {table}: {len(records)}条 (from {fname})")
+        else:
+            logger.info(f"  {table}: 文件不存在，跳过")
+
+    if not os.path.exists(os.path.join(data_dir, "orders.json")):
+        init_mock_data(mock_db, mock_rag)
+        logger.info(f"  使用内置小数据集: orders={mock_db.count('orders')}, payments={mock_db.count('payments')}")
+
+    logger.info(f"  总: orders={mock_db.count('orders')}, payments={mock_db.count('payments')}, "
+                f"risks={mock_db.count('risks')}, reconciliations={mock_db.count('reconciliations')}")
+
+
+def _load_knowledge_base(kb_loader):
+    """加载知识库：优先从 data/knowledge_base.json 批量加载"""
+    kb_path = "./data/knowledge_base.json"
+    if os.path.exists(kb_path):
+        with open(kb_path, "r", encoding="utf-8") as f:
+            kb_records = json.load(f)
+        kb_docs = list(kb_records.values()) if isinstance(kb_records, dict) else kb_records
+        return kb_loader.load(kb_docs, cases=None)
+    return kb_loader.load(KNOWLEDGE_BASE, EXPERT_CASES)
+
+
 def init_system():
     logger.info("=" * 60)
     logger.info("Order Guardian Agents - 工业级订单异常治理系统")
@@ -49,23 +88,20 @@ def init_system():
     mock_mq = MockMQ()
     mock_metrics = MockMetrics()
 
-    logger.info("[4/10] 初始化Fake数据（结构化库）")
-    init_mock_data(mock_db, mock_rag)
-    logger.info(f"  订单数: {mock_db.count('orders')}")
-    logger.info(f"  支付数: {mock_db.count('payments')}")
-    logger.info(f"  风控数: {mock_db.count('risks')}")
-    logger.info(f"  对账数: {mock_db.count('reconciliations')}")
-
-    logger.info("[4.5/10] 初始化Embedding与向量知识库")
+    logger.info("[4/10] 初始化Embedding")
     embedding_provider = EmbeddingProvider(dim=1024)
     logger.info(f"  Embedding后端: {embedding_provider.backend}")
 
+    logger.info("[4.1/10] 加载业务数据（结构化库）")
+    _load_business_data(mock_db, mock_rag)
+
+    logger.info("[4.5/10] 加载向量知识库")
     kb_loader = KnowledgeBaseLoader(
         memory_hub=memory_hub,
         embedding_provider=embedding_provider,
-        enable_chunking=False  # 小知识库不分块，直接用全文embedding
+        enable_chunking=False
     )
-    kb_result = kb_loader.load(KNOWLEDGE_BASE, EXPERT_CASES)
+    kb_result = _load_knowledge_base(kb_loader)
     logger.info(f"  知识库文档: {kb_result['total_documents']}条")
     logger.info(f"  专家案例: {kb_result['total_cases']}条")
     logger.info(f"  向量库大小: {kb_result['vector_store_size']}条")
