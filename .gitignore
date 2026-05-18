@@ -24,3 +24,10 @@ build/
 *.db
 *.faiss
 vectorstore/*.index
+order-guardian.log
+data/
+
+# Env
+.env
+.env.local
+*.pem

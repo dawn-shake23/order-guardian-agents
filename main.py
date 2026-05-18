@@ -1,275 +1,368 @@
-# main.py
 import uuid
+import time
+import json
 from memory.memory_hub import MemoryHub
+from memory.embedding import EmbeddingProvider
+from memory.chunking import ChunkConfig
+from infrastructure.kb_loader import KnowledgeBaseLoader
+from infrastructure.fake_data import init_mock_data, KNOWLEDGE_BASE, EXPERT_CASES
 from tools.tool_lifecycle import ToolLifeCycleManager
 from MCP.mcp_gateway import MCPGateway
 from agents.coordinator import Coordinator
+from agents.plan_agent import PlanAgent
 from agents import (
     OrderAgent,
     PaymentAgent,
     RiskAgent,
     ReconciliationAgent,
-    OperationAgent
+    OperationAgent,
 )
+from infrastructure.mock_infra import MockDB, MockRAG, MockMetrics, MockMQ, MockRedis
+from infrastructure.resilience import (
+    CircuitBreaker, RateLimiter, HeartbeatMonitor, ConcurrencyController
+)
+from infrastructure.decision_engine import DecisionEngine, RuleEngine
+from infrastructure.approval import ApprovalEngine
+from infrastructure.state_persistence import StatePersistence, CheckpointManager
+from infrastructure.agent_pool import AgentPool
 from core.tracing import init_tracing
 from core.logger import get_logger
-from core.errors import OrderGuardianError, SystemError, BusinessError, AgentError, ToolError, InputOutputError
+from core.errors import OrderGuardianError
 
-# 初始化日志
-logger = get_logger()
+logger = get_logger("main")
+
 
 def init_system():
-    """系统全局初始化"""
-    logger.info("开始初始化系统")
-    
-    # 0. 初始化追踪系统
-    logger.info("初始化追踪系统")
+    logger.info("=" * 60)
+    logger.info("Order Guardian Agents - 工业级订单异常治理系统")
+    logger.info("=" * 60)
+
+    logger.info("[1/10] 初始化追踪系统")
     init_tracing()
-    
-    # 1. 初始化记忆中心
-    logger.info("初始化记忆中心")
+
+    logger.info("[2/10] 初始化记忆中心")
     memory_hub = MemoryHub()
 
-    # 2. 初始化工具体系（注册 + 生命周期 + 权限）
-    logger.info("初始化工具体系")
-    ToolLifeCycleManager.global_init(memory_hub)
+    logger.info("[3/10] 初始化Mock基础设施")
+    mock_db = MockDB(persist_path="./data/mock_db.json")
+    mock_rag = MockRAG()
+    mock_mq = MockMQ()
+    mock_metrics = MockMetrics()
 
-    # 3. 初始化 MCP 控制平面
-    logger.info("初始化 MCP 控制平面")
+    logger.info("[4/10] 初始化Fake数据（结构化库）")
+    init_mock_data(mock_db, mock_rag)
+    logger.info(f"  订单数: {mock_db.count('orders')}")
+    logger.info(f"  支付数: {mock_db.count('payments')}")
+    logger.info(f"  风控数: {mock_db.count('risks')}")
+    logger.info(f"  对账数: {mock_db.count('reconciliations')}")
+
+    logger.info("[4.5/10] 初始化Embedding与向量知识库")
+    embedding_provider = EmbeddingProvider(dim=1024)
+    logger.info(f"  Embedding后端: {embedding_provider.backend}")
+
+    kb_loader = KnowledgeBaseLoader(
+        memory_hub=memory_hub,
+        embedding_provider=embedding_provider,
+        enable_chunking=False  # 小知识库不分块，直接用全文embedding
+    )
+    kb_result = kb_loader.load(KNOWLEDGE_BASE, EXPERT_CASES)
+    logger.info(f"  知识库文档: {kb_result['total_documents']}条")
+    logger.info(f"  专家案例: {kb_result['total_cases']}条")
+    logger.info(f"  向量库大小: {kb_result['vector_store_size']}条")
+    logger.info(f"  跳过去重: {kb_result['skipped_duplicate']}条")
+    logger.info(f"  加载耗时: {kb_result['duration_ms']:.1f}ms")
+
+    logger.info("[5/10] 初始化韧性系统")
+    circuit_breakers = {
+        "order": CircuitBreaker("order", failure_threshold=3, recovery_timeout=10),
+        "payment": CircuitBreaker("payment", failure_threshold=3, recovery_timeout=10),
+        "risk": CircuitBreaker("risk", failure_threshold=3, recovery_timeout=10),
+        "reconciliation": CircuitBreaker("reconciliation", failure_threshold=3, recovery_timeout=10),
+        "operation": CircuitBreaker("operation", failure_threshold=3, recovery_timeout=10),
+    }
+    rate_limiters = {
+        "order": RateLimiter("order", max_requests=50, window_seconds=60),
+        "payment": RateLimiter("payment", max_requests=50, window_seconds=60),
+        "risk": RateLimiter("risk", max_requests=30, window_seconds=60),
+        "reconciliation": RateLimiter("reconciliation", max_requests=30, window_seconds=60),
+        "operation": RateLimiter("operation", max_requests=30, window_seconds=60),
+    }
+    heartbeat = HeartbeatMonitor(interval_seconds=10)
+    concurrency = ConcurrencyController(max_concurrent=5)
+
+    logger.info("[6/10] 初始化决策引擎与审批流")
+    rule_engine = RuleEngine()
+    decision_engine = DecisionEngine(rule_engine)
+    approval_engine = ApprovalEngine()
+
+    logger.info("[7/10] 初始化状态持久化")
+    state_persistence = StatePersistence(persist_dir="./state_checkpoints")
+    checkpoint_manager = CheckpointManager(state_persistence)
+
+    logger.info("[8/10] 初始化Agent池")
+    agent_pool = AgentPool(max_per_type=3)
+
+    logger.info("[9/10] 初始化工具体系与MCP")
+    ToolLifeCycleManager.global_init(memory_hub)
     mcp = MCPGateway(memory_hub)
 
-    # 4. 初始化 Coordinator
-    logger.info("初始化 Coordinator")
-    coordinator = Coordinator(mcp, memory_hub)
-
-    # 5. 注册所有专家 Agent
-    logger.info("注册专家 Agent")
+    logger.info("[10/10] 初始化专家Agent（DI注入）")
     agent_map = {
-        "order": OrderAgent(memory_hub),
-        "payment": PaymentAgent(memory_hub),
-        "risk": RiskAgent(memory_hub),
-        "reconciliation": ReconciliationAgent(memory_hub),
-        "operation": OperationAgent(memory_hub),
+        "order": OrderAgent(
+            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+            metrics=mock_metrics,
+            circuit_breaker=circuit_breakers["order"],
+            rate_limiter=rate_limiters["order"]
+        ),
+        "payment": PaymentAgent(
+            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+            metrics=mock_metrics,
+            circuit_breaker=circuit_breakers["payment"],
+            rate_limiter=rate_limiters["payment"]
+        ),
+        "risk": RiskAgent(
+            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+            metrics=mock_metrics,
+            circuit_breaker=circuit_breakers["risk"],
+            rate_limiter=rate_limiters["risk"]
+        ),
+        "reconciliation": ReconciliationAgent(
+            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+            metrics=mock_metrics,
+            circuit_breaker=circuit_breakers["reconciliation"],
+            rate_limiter=rate_limiters["reconciliation"]
+        ),
+        "operation": OperationAgent(
+            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+            metrics=mock_metrics,
+            circuit_breaker=circuit_breakers["operation"],
+            rate_limiter=rate_limiters["operation"]
+        ),
     }
-    
-    logger.info("系统初始化完成")
-    return coordinator, mcp, memory_hub, agent_map
 
-def run_demo_task():
-    """运行一条完整任务流程"""
-    coordinator, mcp, memory_hub, agent_map = init_system()
+    for agent_type, agent in agent_map.items():
+        agent_pool.register(agent_type, agent)
 
-    # 模拟任务信息
-    session_id = f"session_{uuid.uuid4().hex[:8]}"
-    order_id = f"ORD{uuid.uuid4().int % 100000000:08d}"
+    plan_agent = PlanAgent(
+        memory_hub=memory_hub,
+        metrics=mock_metrics,
+        circuit_breaker=CircuitBreaker("plan", failure_threshold=3),
+        rate_limiter=RateLimiter("plan", max_requests=20, window_seconds=60)
+    )
 
-    # 模拟执行计划（Plan 层输出结构）
-    execution_plan = {
+    coordinator = Coordinator(
+        mcp=mcp,
+        memory_hub=memory_hub,
+        mock_db=mock_db,
+        mock_rag=mock_rag,
+        metrics=mock_metrics,
+        mock_mq=mock_mq,
+        decision_engine=decision_engine,
+        approval_engine=approval_engine,
+        state_persistence=state_persistence,
+        agent_pool=agent_pool,
+        concurrency_controller=concurrency
+    )
+
+    heartbeat.register("coordinator")
+    heartbeat.register("order_agent")
+    heartbeat.register("payment_agent")
+    heartbeat.register("risk_agent")
+    for name in ["coordinator", "order_agent", "payment_agent", "risk_agent",
+                  "reconciliation_agent", "operation_agent"]:
+        heartbeat.beat(name)
+    heartbeat.start(on_unhealthy=lambda n, i: logger.warning("心跳异常", extra={"component": n, "info": i}))
+
+    logger.info("系统初始化完成！所有组件就绪。")
+
+    return {
+        "coordinator": coordinator,
+        "plan_agent": plan_agent,
+        "mcp": mcp,
+        "memory_hub": memory_hub,
+        "agent_map": agent_map,
+        "mock_db": mock_db,
+        "mock_rag": mock_rag,
+        "mock_mq": mock_mq,
+        "mock_metrics": mock_metrics,
+        "heartbeat": heartbeat,
+        "circuit_breakers": circuit_breakers,
+        "rate_limiters": rate_limiters,
+        "decision_engine": decision_engine,
+        "approval_engine": approval_engine,
+        "state_persistence": state_persistence,
+        "checkpoint_manager": checkpoint_manager,
+        "agent_pool": agent_pool,
+        "concurrency": concurrency,
+        "embedding_provider": embedding_provider,
+        "kb_loader": kb_loader,
+    }
+
+
+def run_task(system, order_id, abnormal_detail="支付超时"):
+    coordinator = system["coordinator"]
+    plan_agent = system["plan_agent"]
+    agent_map = system["agent_map"]
+    heartbeat = system["heartbeat"]
+    mock_metrics = system["mock_metrics"]
+
+    session_id = f"sess_{uuid.uuid4().hex[:8]}"
+
+    heartbeat.beat("coordinator")
+
+    plan_result = plan_agent.run({
         "session_id": session_id,
         "order_id": order_id,
-        "intent": {
-            "raw_query": "查询订单支付状态",
-            "rewritten_query": "查询订单支付状态并进行风险排查",
-            "intent_type": "payment_check",
-            "constraints": []
-        },
-        "global_analysis": {
-            "order_state_analysis": "订单已创建，支付待确认",
-            "risk_prejudgment": "低风险",
-            "abnormal_level": "low",
-            "complexity": "low",
-            "data_dependencies": ["order_info", "payment_info"]
-        },
-        "data_requirements": {
-            "order_data": ["order_id", "status", "amount"],
-            "payment_data": ["payment_id", "status", "amount"],
-            "risk_data": [],
-            "reconciliation_data": []
-        },
-        "knowledge_demand": {
-            "retrieval_queries": ["支付异常处理", "风险评估标准"],
-            "retrieval_scenes": ["payment", "risk"],
-            "knowledge_type": ["rule", "process"]
-        },
-        "steps": [
-            {
-                "step_id": 1, "expert_type": "order", "goal": "查询订单基础信息",
-                "data_used": ["order_id", "status", "amount"],
-                "retrieval_used": False,
-                "validation_criteria": {},
-                "expected_output": "订单基础信息"
-            },
-            {
-                "step_id": 2, "expert_type": "payment", "goal": "核查支付渠道状态",
-                "data_used": ["payment_id", "status", "amount"],
-                "retrieval_used": True,
-                "validation_criteria": {},
-                "expected_output": "支付状态信息"
-            },
-            {
-                "step_id": 3, "expert_type": "risk", "goal": "风险评估与权限校验",
-                "data_used": ["order_id", "payment_status"],
-                "retrieval_used": True,
-                "validation_criteria": {},
-                "expected_output": "风险评估结果"
-            },
-            {
-                "step_id": 4, "expert_type": "reconciliation", "goal": "账实核对",
-                "data_used": ["order_amount", "payment_amount"],
-                "retrieval_used": False,
-                "validation_criteria": {},
-                "expected_output": "对账结果"
-            },
-            {
-                "step_id": 5, "expert_type": "operation", "goal": "给出运营建议",
-                "data_used": ["order_status", "payment_status", "risk_level"],
-                "retrieval_used": False,
-                "validation_criteria": {},
-                "expected_output": "运营建议"
-            },
-        ],
-        "final_goal": "完成订单异常排查并给出处理建议",
-        "success_criteria": {
-            "order_info_obtained": True,
-            "payment_status_confirmed": True,
-            "risk_assessment_completed": True,
-            "reconciliation_done": True,
-            "operation_suggestion_given": True
-        }
-    }
-
-    logger.info("开始执行多专家协同任务", extra={"session_id": session_id, "order_id": order_id})
-    print("===== 开始执行多专家协同任务 =====")
-    print(f"session_id: {session_id}")
-    print(f"order_id: {order_id}\n")
-
-    # 启动 Coordinator 调度
-    logger.info("启动 Coordinator 调度", extra={"session_id": session_id})
-    final_report = coordinator.execute(execution_plan, agent_map)
-
-    # 输出最终结果
-    logger.info("任务执行完成，生成最终报告", extra={"session_id": session_id, "plan_success": final_report.get('plan_success', False)})
-    print("\n===== 最终会诊报告 =====")
-    print(f"状态: {'成功' if final_report['plan_success'] else '失败'}")
-    print(f"风险等级: {final_report['risk_level']}")
-    print(f"根因: {final_report['abnormal_root_cause']}")
-    print(f"解决方案: {final_report['solution']}")
-    print(f"总结: {final_report['final_summary']}")
-
-def run_rag_demo(memory_hub: MemoryHub):
-    """运行RAG增强功能演示"""
-    import numpy as np
-    from memory.storage.sync_manager import DataSyncManager, SyncOperation
-    from tools.DeepSearch.deep_search import DeepSearchEngine, DeepSearchQuery
-    from tools.DeepSearch.rag_pipeline import RAGPipeline
-    from agents.rag_orchestrator import AgentRAGOrchestrator, ToolDecision
-
-    print("\n" + "=" * 60)
-    print("  RAG 增强功能演示")
-    print("=" * 60)
-
-    # ---- 1. 双库一致性演示 ----
-    print("\n--- 1. 双库一致性：DataSyncManager ---")
-    sync = memory_hub.sync()
-
-    mock_embedding = np.random.rand(128).tolist()
-    record = sync.insert(
-        table="documents",
-        doc_id="DOC001",
-        data={"title": "支付掉单处理规范", "content": "当支付回调未到达时...", "biz_domain": "payment"},
-        embedding=mock_embedding,
-        metadata={"doc_id": "DOC001", "table": "documents"}
-    )
-    print(f"  插入同步结果: status={record.status.value}, record_id={record.record_id}")
-
-    record = sync.soft_delete(table="documents", doc_id="DOC001", data={"title": "支付掉单处理规范", "content": "已过期"})
-    print(f"  软删同步结果: status={record.status.value}")
-
-    comp_status = sync.get_compensation_status()
-    print(f"  补偿队列状态: pending={comp_status['pending_count']}")
-
-    # ---- 2. 混合检索演示 ----
-    print("\n--- 2. 混合检索：业务字段预过滤 + 向量检索 ---")
-    hybrid = memory_hub.hybrid()
-
-    memory_hub.struct_mysql.save("documents", "DOC002", {
-        "doc_id": "DOC002", "title": "订单超时处理", "content": "订单超过30分钟未支付自动关闭",
-        "biz_domain": "order", "is_deleted": False, "is_archived": False
-    })
-    memory_hub.vector_store.add(np.random.rand(128).tolist(), {
-        "doc_id": "DOC002", "title": "订单超时处理", "content": "订单超过30分钟未支付自动关闭",
-        "biz_domain": "order"
+        "abnormal_detail": abnormal_detail
     })
 
-    results = hybrid.search_with_filter(
-        query_embedding=np.random.rand(128).tolist(),
-        biz_domain="order",
-        top_k=3
-    )
-    print(f"  混合检索结果数: {len(results)}")
-    for r in results:
-        print(f"    - {r.get('metadata', {}).get('title', 'N/A')} (distance={r.get('distance', 'N/A')})")
+    plan_result["session_id"] = session_id
+    plan_result["order_id"] = order_id
 
-    # ---- 3. DeepSearch演示 ----
-    print("\n--- 3. DeepSearch：多路召回 + RRF融合 + 粗排精排 ---")
-    deep_search = DeepSearchEngine(hybrid)
+    print(f"\n{'='*60}")
+    print(f"  订单异常治理任务")
+    print(f"{'='*60}")
+    print(f"  Session: {session_id}")
+    print(f"  Order:   {order_id}")
+    print(f"  异常描述: {abnormal_detail}")
+    print(f"  规划步骤: {len(plan_result.get('steps', []))}步")
+    for step in plan_result.get("steps", []):
+        deps = step.get("depends_on", [])
+        print(f"    Step {step['step_id']}: [{step['expert_type']}] {step['goal']}"
+              + (f" (依赖: {deps})" if deps else ""))
 
-    ds_query = DeepSearchQuery(
-        raw_query="过去30天支付域掉单案例",
-        biz_domain="payment",
-        require_cross_validation=True,
-        top_k=3
-    )
-    ds_results = deep_search.search(ds_query)
-    print(f"  DeepSearch结果数: {len(ds_results)}")
-    for r in ds_results:
-        print(f"    - [{r.doc_id}] {r.title} (score={r.score:.4f}, validated={r.validated}, routes={r.source_route})")
+    final_report = coordinator.execute(plan_result, agent_map)
 
-    # ---- 4. RAG流水线演示 ----
-    print("\n--- 4. RAG增强：噪声过滤 + 上下文压缩 + 结构化Prompt ---")
-    rag = RAGPipeline(max_context_tokens=4000)
+    heartbeat.beat("coordinator")
 
-    mock_search_results = [
-        {"metadata": {"doc_id": "D1", "title": "支付掉单处理", "content": "当支付回调未到达时，需要手动查询渠道状态并补偿", "biz_domain": "payment"}, "score": 0.8},
-        {"metadata": {"doc_id": "D2", "title": "订单超时规则", "content": "订单超过30分钟未支付自动关闭", "biz_domain": "order"}, "score": 0.3},
-        {"metadata": {"doc_id": "D3", "title": "风控评分标准", "content": "高风险订单需要人工审核", "biz_domain": "risk"}, "score": 0.1},
-    ]
-    rag_prompt = rag.process(mock_search_results, "支付掉单怎么处理", biz_domain="payment")
-    print(f"  RAG Prompt长度: {len(rag_prompt)} 字符")
-    print(f"  Prompt前200字: {rag_prompt[:200]}...")
+    print(f"\n{'='*60}")
+    print(f"  最终会诊报告")
+    print(f"{'='*60}")
+    print(f"  执行状态: {'成功' if final_report['plan_success'] else '失败'}")
+    print(f"  风险等级: {final_report['risk_level']}")
+    print(f"  决策类型: {final_report.get('decision_type', 'N/A')}")
+    print(f"  决策置信度: {final_report.get('decision_confidence', 0):.0%}")
+    print(f"  需要审批: {'是' if final_report.get('needs_approval') else '否'}")
+    print(f"  根因分析: {final_report['abnormal_root_cause']}")
+    print(f"  解决方案: {final_report['solution']}")
+    print(f"  总耗时: {final_report.get('total_duration_ms', 0):.1f}ms")
 
-    # ---- 5. Agent+RAG联动演示 ----
-    print("\n--- 5. Agent+RAG联动：工具调用决策 + 记忆路由 ---")
-    orchestrator = AgentRAGOrchestrator(
-        memory_hub,
-        deep_search_engine=deep_search,
-        rag_pipeline=rag
-    )
+    print(f"\n  --- 专家步骤详情 ---")
+    for step in final_report.get("expert_steps", []):
+        status_icon = "OK" if step.get("status") == "completed" else "FAIL"
+        duration = step.get("duration_ms", 0)
+        print(f"  [{status_icon}] Step {step.get('step_id', '?')} "
+              f"[{step.get('expert_type', '?')}] {step.get('goal', '?')}"
+              f" ({duration:.1f}ms)")
+        if step.get("retried"):
+            print(f"       (重试成功)")
+        if step.get("degraded_from"):
+            print(f"       (降级自: {step['degraded_from']})")
+        result = step.get("result", {})
+        if isinstance(result, dict):
+            for k, v in result.items():
+                if k not in ("rule_ref", "all_payments") and v is not None:
+                    val_str = str(v)
+                    if len(val_str) > 100:
+                        val_str = val_str[:100] + "..."
+                    print(f"       {k}: {val_str}")
 
-    test_queries = [
-        ("payment", "过去30天支付域掉单案例"),
-        ("order", "查询订单状态"),
-        ("risk", "是"),
-    ]
+    print(f"\n  总结: {final_report['final_summary']}")
 
-    for agent_type, query in test_queries:
-        result = orchestrator.orchestrate(
-            agent_type=agent_type,
-            query=query,
-            session_id="demo_session",
-            order_id="ORD00001"
-        )
-        print(f"  [{agent_type}] '{query}' → action={result['action']}, reason={result['reason']}")
+    return final_report
 
-    print("\n" + "=" * 60)
-    print("  RAG 增强功能演示完成")
-    print("=" * 60)
+
+def print_system_status(system):
+    print(f"\n{'='*60}")
+    print(f"  系统状态监控")
+    print(f"{'='*60}")
+
+    metrics = system["mock_metrics"]
+    snapshot = metrics.snapshot()
+    print(f"\n  --- 监控指标 ---")
+    print(f"  Counters:")
+    for k, v in sorted(snapshot["counters"].items()):
+        print(f"    {k}: {v:.0f}")
+    print(f"  Histograms:")
+    for k, v in sorted(snapshot["histograms"].items()):
+        print(f"    {k}: avg={v['avg']:.1f}ms, max={v['max']:.1f}ms, count={v['count']}")
+
+    print(f"\n  --- 熔断器状态 ---")
+    for name, cb in system["circuit_breakers"].items():
+        state = cb.get_state()
+        print(f"  {name}: {state['state']} (failures={state['failure_count']})")
+
+    print(f"\n  --- 限流器状态 ---")
+    for name, rl in system["rate_limiters"].items():
+        status = rl.get_status()
+        print(f"  {name}: {status['current_requests']}/{status['max_requests']} in {status['window_seconds']}s")
+
+    print(f"\n  --- Agent池状态 ---")
+    pool_status = system["agent_pool"].get_status()
+    for name, info in pool_status.items():
+        print(f"  {name}: total={info['total']}, available={info['available']}, in_use={info['in_use']}")
+
+    print(f"\n  --- 并发控制 ---")
+    conc = system["concurrency"].get_status()
+    print(f"  max={conc['max_concurrent']}, active={conc['active_count']}, available={conc['available']}")
+
+    print(f"\n  --- 心跳状态 ---")
+    health = system["heartbeat"].check_health()
+    for name, info in health.items():
+        print(f"  {name}: {info['status']} (last beat {info['last_beat_ago']}s ago)")
+
+    print(f"\n  --- 持久化会话 ---")
+    sessions = system["state_persistence"].list_sessions()
+    print(f"  已保存会话数: {len(sessions)}")
+    for sid in sessions[:5]:
+        state = system["state_persistence"].load(sid)
+        if state:
+            print(f"    {sid}: order={state.order_id}, success={state.plan_success}")
+
+
+def main():
+    system = init_system()
+
+    print(f"\n{'#'*60}")
+    print(f"  场景1: 支付超时订单 (ORD00001)")
+    print(f"{'#'*60}")
+    run_task(system, "ORD00001", "支付超时，回调未到达")
+
+    print(f"\n{'#'*60}")
+    print(f"  场景2: 风控拦截订单 (ORD00003)")
+    print(f"{'#'*60}")
+    run_task(system, "ORD00003", "高风险风控拦截，黑名单用户")
+
+    print(f"\n{'#'*60}")
+    print(f"  场景3: 正常订单 (ORD00002)")
+    print(f"{'#'*60}")
+    run_task(system, "ORD00002", "订单状态确认")
+
+    print(f"\n{'#'*60}")
+    print(f"  场景4: PlanAgent缓存测试 (10秒内复用)")
+    print(f"{'#'*60}")
+    plan1 = system["plan_agent"].run({
+        "session_id": "cache_test_1", "order_id": "ORD00001",
+        "abnormal_detail": "支付超时"
+    })
+    plan2 = system["plan_agent"].run({
+        "session_id": "cache_test_2", "order_id": "ORD00001",
+        "abnormal_detail": "支付超时"
+    })
+    print(f"  同order_id两次规划: {'命中缓存' if plan1 == plan2 else '重新规划'}")
+
+    print_system_status(system)
+
+    system["heartbeat"].stop()
+
+    print(f"\n{'='*60}")
+    print(f"  Order Guardian Agents 运行完成！")
+    print(f"{'='*60}")
+
 
 if __name__ == "__main__":
     try:
-        coordinator, mcp, memory_hub, agent_map = init_system()
-        run_demo_task()
-        run_rag_demo(memory_hub)
+        main()
     except OrderGuardianError as e:
         logger.error(f"OrderGuardianError: {e.error_code.value} - {e.message}", extra=e.extra)
     except Exception as e:

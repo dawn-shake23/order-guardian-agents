@@ -178,7 +178,7 @@ class DeepSearchEngine:
         # Step 2: 多路召回
         import numpy as np
         if query_embedding is None:
-            query_embedding = np.random.rand(128).tolist()
+            query_embedding = np.random.rand(1024).tolist()
 
         multi_route = self.hybrid.multi_route_recall(
             query=query.raw_query,

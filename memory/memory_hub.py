@@ -13,7 +13,7 @@ class MemoryHub:
         # 双层存储
         self.struct_redis = RedisMemoryClient()
         self.struct_mysql = MySQLMemoryRepo()
-        self.vector_store = VectorMemoryStore()
+        self.vector_store = VectorMemoryStore(dimension=1024)
 
         # 双库一致性管理器
         self.sync_manager = DataSyncManager(self.struct_mysql, self.vector_store)
