@@ -28,6 +28,5 @@ order-guardian.log
 data/
 
 # Env
-.env
 .env.local
 *.pem
