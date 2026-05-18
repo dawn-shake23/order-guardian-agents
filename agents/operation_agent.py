@@ -23,13 +23,15 @@ class OperationAgent(BaseAgent):
         order_id = input_context.get("order_id", "")
         session_id = input_context.get("session_id", "")
 
-        rag_results = self.mock_rag.search(
-            query="运营SOP订单异常处理", biz_domain="operation", top_k=2, doc_type="sop"
-        )
+        result = self.call_tool("vector_search", {
+            "query": "运营SOP订单异常处理", "biz_domain": "operation", "top_k": 2,
+        })
+        rag_results = result.data.get("search_result", []) if result.success else []
 
-        case_results = self.mock_rag.search(
-            query="支付掉单案例", biz_domain="payment", top_k=2, doc_type="case"
-        )
+        result = self.call_tool("vector_search", {
+            "query": "支付掉单案例", "biz_domain": "payment", "top_k": 2,
+        })
+        case_results = result.data.get("search_result", []) if result.success else []
 
         order_data = self.memory_hub.struct_redis.get(f"order_data:{session_id}")
         payment_data = self.memory_hub.struct_redis.get(f"payment_data:{session_id}")

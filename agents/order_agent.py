@@ -28,9 +28,10 @@ class OrderAgent(BaseAgent):
             order_data = {"order_id": order_id, "status": "unknown", "amount": 0,
                           "error": "订单不存在", "error_code": "E1001"}
 
-        rag_results = self.mock_rag.search(
-            query="订单异常处理规则", biz_domain="order", top_k=2, doc_type="rule"
-        )
+        result = self.call_tool("vector_search", {
+            "query": "订单异常处理规则", "biz_domain": "order", "top_k": 2,
+        })
+        rag_results = result.data.get("search_result", []) if result.success else []
 
         self.memory_hub.struct_redis.set(
             f"order_data:{session_id}", order_data, expire=3600

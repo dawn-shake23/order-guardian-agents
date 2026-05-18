@@ -28,15 +28,17 @@ class RiskAgent(BaseAgent):
             risk_data = {"order_id": order_id, "risk_level": "low", "score": 10,
                          "hit_rules": [], "reason": "无风控记录，默认低风险"}
 
-        rag_results = self.mock_rag.search(
-            query="风控策略规则", biz_domain="risk", top_k=2, doc_type="policy"
-        )
+        result = self.call_tool("vector_search", {
+            "query": "风控策略规则", "biz_domain": "risk", "top_k": 2,
+        })
+        rag_results = result.data.get("search_result", []) if result.success else []
 
         if risk_data.get("risk_level") == "high":
-            rule_results = self.mock_rag.search(
-                query="E3001风控拦截处理", biz_domain="risk", top_k=2, doc_type="rule"
-            )
-            rag_results.extend(rule_results)
+            result = self.call_tool("vector_search", {
+                "query": "E3001风控拦截处理", "biz_domain": "risk", "top_k": 2,
+            })
+            if result.success:
+                rag_results.extend(result.data.get("search_result", []))
 
         self.memory_hub.struct_redis.set(
             f"risk_data:{session_id}", risk_data, expire=3600

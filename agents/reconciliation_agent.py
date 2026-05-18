@@ -28,16 +28,18 @@ class ReconciliationAgent(BaseAgent):
             recon_data = {"order_id": order_id, "diff_amount": 0, "diff_type": "none",
                           "status": "no_data", "order_status": "unknown", "payment_status": "unknown"}
 
-        rag_results = self.mock_rag.search(
-            query="对账不一致处理流程", biz_domain="reconciliation", top_k=2, doc_type="process"
-        )
+        result = self.call_tool("vector_search", {
+            "query": "对账不一致处理流程", "biz_domain": "reconciliation", "top_k": 2,
+        })
+        rag_results = result.data.get("search_result", []) if result.success else []
 
         diff_type = recon_data.get("diff_type", "none")
         if diff_type != "none":
-            rule_results = self.mock_rag.search(
-                query="E3004对账差异处理", biz_domain="reconciliation", top_k=2, doc_type="rule"
-            )
-            rag_results.extend(rule_results)
+            result = self.call_tool("vector_search", {
+                "query": "E3004对账差异处理", "biz_domain": "reconciliation", "top_k": 2,
+            })
+            if result.success:
+                rag_results.extend(result.data.get("search_result", []))
 
         self.memory_hub.struct_redis.set(
             f"recon_data:{session_id}", recon_data, expire=3600

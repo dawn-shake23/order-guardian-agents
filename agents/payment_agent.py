@@ -32,13 +32,15 @@ class PaymentAgent(BaseAgent):
 
         rag_results = []
         if error_code:
-            rag_results = self.mock_rag.search(
-                query=f"{error_code}处理规则", biz_domain="payment", top_k=2, doc_type="rule"
-            )
+            result = self.call_tool("vector_search", {
+                "query": f"{error_code}处理规则", "biz_domain": "payment", "top_k": 2,
+            })
+            rag_results = result.data.get("search_result", []) if result.success else []
         if not rag_results:
-            rag_results = self.mock_rag.search(
-                query="支付异常处理", biz_domain="payment", top_k=2
-            )
+            result = self.call_tool("vector_search", {
+                "query": "支付异常处理", "biz_domain": "payment", "top_k": 2,
+            })
+            rag_results = result.data.get("search_result", []) if result.success else []
 
         self.memory_hub.struct_redis.set(
             f"payment_data:{session_id}", primary_payment, expire=3600
