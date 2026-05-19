@@ -282,3 +282,924 @@
 {"timestamp": "2026-04-19T02:31:10.555760", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
 {"timestamp": "2026-04-19T02:31:10.555760", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
 {"timestamp": "2026-04-19T02:31:10.557277", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:45.811102", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:45.811699", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:45.811699", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:45.811699", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.063844", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.086476", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.086476", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.089535", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.089535", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.089535", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.089535", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.090545", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.090545", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.090545", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.091543", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.115496", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.139573", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.168786", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.169787", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.169787", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.169787", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.169787", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.198091", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.201230", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.203238", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.206280", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.243227", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.261968", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.296318", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.307342", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.342060", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.355615", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.388533", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.402348", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.438239", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.482351", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.483647", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.485644", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.486718", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.523269", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.541908", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.573989", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.588409", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.623142", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.635321", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.675716", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.698111", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.736297", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.779652", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.779652", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.782429", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.784429", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.819650", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.837817", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.871056", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.884706", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.914050", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.931102", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.967707", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:46.978749", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:47.014165", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-04-19T07:18:47.056443", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.405408", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.406409", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.417408", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.420409", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.420409", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.420409", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.421409", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.421409", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.423410", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.423410", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.423410", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.423410", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.424408", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.424408", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.424408", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.424408", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.425407", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.425407", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.425407", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.425407", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.426408", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.426408", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.427411", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.427411", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.428408", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.428408", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.429411", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.429411", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.431411", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.432408", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:29:19.432408", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.936746", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.937749", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.946276", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.947274", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.948277", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.948277", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.948277", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.949274", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.950273", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.950273", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.951275", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.951275", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.951275", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.951275", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.952273", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.952273", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.952273", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.952273", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.952273", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.953275", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.954275", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.954275", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.954275", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.955277", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.956278", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.956278", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.956278", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.957277", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.958277", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.960277", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:01.960277", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.314937", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.315937", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.315937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.315937", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.315937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.316937", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.316937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.316937", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.316937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.317937", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.317937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.317937", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.318937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.318937", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.318937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.319938", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.319938", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.319938", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.319938", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.320937", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:02.320937", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.552013", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.552013", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.563407", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.564400", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.565400", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.565400", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.565400", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.566399", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.567399", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.567399", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.568398", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.568398", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.568398", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.569399", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.569399", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.569399", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.569399", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.569399", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.570399", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.570399", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.571398", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.571398", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.572399", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.572399", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.573401", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.573401", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.573401", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.574402", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.576403", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.577403", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.577403", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.599412", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.599412", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.600411", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.600411", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.601402", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.601402", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.602400", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.602400", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.602400", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.603399", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.603399", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.604400", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.604400", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.605400", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.605400", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.606405", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.606405", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.606405", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.606405", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.607405", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:31.607405", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.602440", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.603437", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.603437", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.603437", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.793627", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.794631", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.795627", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "[4.5/10] \u521d\u59cb\u5316Embedding\u4e0e\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.796630", "level": "INFO", "message": "  Embedding\u540e\u7aef: deterministic", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.797629", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.811633", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.811633", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 10\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.811633", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 4\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.812630", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 14\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.812630", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.812630", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 13.0ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.812630", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.812630", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.813628", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.813628", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.814629", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.816630", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.818630", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.818630", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.818630", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.819631", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.819631", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T09:30:45.821630", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:06.579864", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:06.580863", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:09.293011", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:09.460677", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:09.577814", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:09.819684", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:09.924792", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.178369", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.310478", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.310478", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.311477", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.311477", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.559349", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.559349", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.560878", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.560878", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.676591", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.676591", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.676591", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.676591", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.856259", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.856259", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.857259", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.857259", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.858259", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.859260", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.859260", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.859771", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.861792", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.862797", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.862797", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:10.911815", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.047999", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.047999", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.048999", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.048999", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.289156", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.289156", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.289156", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.290159", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.393697", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.393697", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.393697", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.394699", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.640049", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.640049", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.641042", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.641042", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.764610", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.764610", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.764610", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T10:32:11.764610", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:01:45.829429", "level": "INFO", "message": "\u4f1a\u8bdd\u521b\u5efa", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:24.007764", "level": "INFO", "message": "\u4f1a\u8bdd\u521b\u5efa", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:24.038334", "level": "INFO", "message": "\u7ba1\u9053\u521b\u5efa\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:24.044950", "level": "INFO", "message": "\u4efb\u52a1\u5df2\u63d0\u4ea4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:24.044950", "level": "INFO", "message": "\u6a21\u62df\u5411\u91cf\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.512182", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.513185", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.526209", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.528120", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.529132", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.529132", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.530131", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.531175", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.533133", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.534129", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.534129", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.534129", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.534129", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.534129", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.535638", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.535638", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.536651", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.536651", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.536651", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.536651", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.544661", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.544661", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.544661", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.547183", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.549183", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.549183", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.549183", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.550180", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.551181", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.553182", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.553182", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.598965", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.600034", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.600586", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.601128", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.601128", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.602202", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.602202", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.602743", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.602743", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.603291", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.603291", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.603828", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.603828", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.604365", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.604907", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.605443", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.605443", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.605979", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.606518", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.606518", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:45.606518", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.045387", "level": "INFO", "message": "\u6587\u672c\u5206\u5757\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.046483", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.058883", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.059950", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.060486", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.061001", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.061001", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.062011", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.063008", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.064008", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.064008", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.064008", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.065008", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.065008", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.065008", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.066008", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.066008", "level": "INFO", "message": "DeepSearch\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.066008", "level": "INFO", "message": "\u67e5\u8be2\u62c6\u89e3\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.066008", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.066008", "level": "INFO", "message": "DeepSearch\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.074244", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.074244", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.074780", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.075849", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.077535", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.077535", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.078072", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.078594", "level": "INFO", "message": "\u67e5\u8be2\u6539\u5199\u6210\u529f", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.079668", "level": "INFO", "message": "\u5019\u9009\u67e5\u8be2\u751f\u6210\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.081208", "level": "INFO", "message": "Agent+RAG\u7f16\u6392\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.081208", "level": "INFO", "message": "\u8bb0\u5fc6\u8def\u7531\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.099255", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.099255", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.100258", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.100258", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.100258", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.101254", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.101254", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.102254", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.103760", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.103760", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.104769", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.104769", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.104769", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.105769", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.105769", "level": "INFO", "message": "\u566a\u58f0\u8fc7\u6ee4\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:02:59.105769", "level": "INFO", "message": "RAG\u6d41\u6c34\u7ebf\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.646123", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.647123", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.647123", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.647123", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.816266", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.817259", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.817259", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "[4.5/10] \u521d\u59cb\u5316Embedding\u4e0e\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.819253", "level": "INFO", "message": "  Embedding\u540e\u7aef: deterministic", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.820256", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.835282", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.835282", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 10\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 4\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 14\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 15.0ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.836285", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.837290", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.837290", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.846810", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.848321", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.849336", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.849336", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.849336", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.849336", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.851334", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.854319", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.855830", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.859839", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.862840", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.883467", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.885454", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.898248", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.900260", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.914274", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.917273", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.929181", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.933233", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.949945", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.949945", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.951945", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.954201", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.956201", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.974933", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.976941", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.990525", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:05.993494", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.005796", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.008828", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.021324", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.024351", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.039453", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.040453", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.041453", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.043454", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.045453", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.069934", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.072936", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.084360", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.087377", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.099931", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.102447", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.114684", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.117695", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:08:06.132922", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.526464", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.527969", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.527969", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.527969", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.675989", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.677497", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.677497", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.678907", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.679413", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.679413", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.679413", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.679413", "level": "INFO", "message": "[4.5/10] \u521d\u59cb\u5316Embedding\u4e0e\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.679413", "level": "INFO", "message": "  Embedding\u540e\u7aef: deterministic", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.680084", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 10\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 4\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 14\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 15.3ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.696383", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.697388", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.697388", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.697388", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.698384", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.707904", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.709406", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.710411", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.710411", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.710411", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.710411", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.712409", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.712409", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.714408", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.717409", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.738042", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.739525", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.764911", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.766912", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.767915", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.780596", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.782599", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.784108", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.795626", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.797756", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.799373", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.811041", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.813371", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.813928", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.815521", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.830961", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.831501", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.832581", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.835869", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.837499", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.838509", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.858442", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.859452", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.861453", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.872965", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.874965", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.874965", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.876963", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.889023", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.890542", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.892553", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.904569", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.906275", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.907273", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.909272", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.938637", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.939640", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.940634", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.943645", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.945702", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.946706", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.966884", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.968887", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.969885", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.982706", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.984710", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.986218", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:37.998595", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.000595", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.001594", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.014106", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.016106", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.016106", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.018613", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:38.033133", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.283153", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.283153", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.283153", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.283153", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.450560", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.451557", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.451557", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.454555", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.454555", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.454555", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.454555", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.454555", "level": "INFO", "message": "[4.5/10] \u521d\u59cb\u5316Embedding\u4e0e\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.455558", "level": "INFO", "message": "  Embedding\u540e\u7aef: deterministic", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.455558", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 10\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 4\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 14\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.477613", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 22.1ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.478607", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.478607", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.478607", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.478607", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.479611", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.490134", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.491646", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.491646", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.492658", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.492658", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.492658", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.494676", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.495669", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.496671", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.499673", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.525011", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.527012", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.545572", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.548582", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.550572", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.577137", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.580136", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.582133", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.609219", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.612234", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.614231", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.638929", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.640442", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.641456", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.643469", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.658987", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.659989", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.661502", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.663516", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.665518", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.667516", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.686087", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.688089", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.689084", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.702133", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.703131", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.704642", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.706658", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.718182", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.720182", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.722184", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.733714", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.736233", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.736233", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.739249", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.766922", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.768432", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.770446", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.773444", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.774453", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.776452", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.796503", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.798487", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.800487", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.812142", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.814139", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.815140", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.827659", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.829661", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.830660", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.843690", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.845703", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.846704", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.848700", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:14:55.879118", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.547481", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.548483", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.548483", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.548483", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.726892", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.728879", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.728879", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Fake\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.729876", "level": "INFO", "message": "  \u8ba2\u5355\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.730877", "level": "INFO", "message": "  \u652f\u4ed8\u6570: 4", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.730877", "level": "INFO", "message": "  \u98ce\u63a7\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.730877", "level": "INFO", "message": "  \u5bf9\u8d26\u6570: 3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:09.730877", "level": "INFO", "message": "[4.5/10] \u521d\u59cb\u5316Embedding\u4e0e\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:11.269421", "level": "INFO", "message": "  Embedding\u540e\u7aef: dashscope", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:11.270429", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.511944", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.512940", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 10\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.512940", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 4\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.512940", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 14\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.512940", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.512940", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 5241.5ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.513947", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.513947", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.513947", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.513947", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.514969", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.526247", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.527247", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.527247", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.527247", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.527247", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.527247", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.529762", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.529762", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.531759", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.532759", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.550799", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.551795", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.568485", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.571054", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.572071", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.584288", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.585288", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.587810", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.601181", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.602176", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.603686", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.616076", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.618075", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.619081", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.621075", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.650272", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.650272", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.651267", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.654265", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.655266", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.656270", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.678020", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.680030", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.681032", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.693873", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.695877", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.695877", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.697873", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.709699", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.711596", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.713635", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.725635", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.727632", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.728633", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.729634", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.744929", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.745929", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.746929", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.748929", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.749930", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.750934", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.772553", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.775019", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.776031", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.787909", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.789884", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.790882", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.803452", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.804491", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.806024", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.819723", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.821715", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.821715", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.823715", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:16:16.839224", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.552339", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.552339", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.552339", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.552339", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.704968", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.704968", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:19.704968", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Embedding", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:21.181710", "level": "INFO", "message": "  Embedding\u540e\u7aef: dashscope", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:21.182707", "level": "INFO", "message": "[4.1/10] \u52a0\u8f7d\u4e1a\u52a1\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:22.022023", "level": "INFO", "message": "  orders: 250\u6761 (from orders.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:24.246347", "level": "INFO", "message": "  payments: 250\u6761 (from payments.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:26.220611", "level": "INFO", "message": "  risks: 150\u6761 (from risks.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:28.712576", "level": "INFO", "message": "  reconciliations: 150\u6761 (from reconciliations.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:28.712576", "level": "INFO", "message": "  \u603b: orders=250, payments=250, risks=150, reconciliations=150", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:28.712576", "level": "INFO", "message": "[4.5/10] \u52a0\u8f7d\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:26:28.734687", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 200\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 200\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 44465.7ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.200409", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.201927", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.201927", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.202951", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.212451", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.213473", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.214470", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.214470", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.214470", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.214470", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.216469", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.217471", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.218472", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.220469", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.238678", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.240676", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.260582", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.263601", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.264582", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.276322", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.278334", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.280334", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.291855", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.293858", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.294858", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.295857", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.308336", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.310353", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.311356", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.313356", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.342240", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.343241", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.344242", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.346238", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.348240", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.349242", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.371073", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.372622", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.374625", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.401175", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.403182", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.405434", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.416957", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.418969", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.419969", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.420967", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.432478", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.434485", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.435490", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.439561", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.466578", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.468087", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.474020", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.477031", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.478029", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.480249", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.494767", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.497287", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.498286", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.509810", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.512338", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.512338", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.514344", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.525898", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.527904", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.527904", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.529902", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.541427", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.543953", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.543953", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.545958", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-18T11:27:13.559537", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.731335", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.732335", "level": "INFO", "message": "Order Guardian Agents - \u5de5\u4e1a\u7ea7\u8ba2\u5355\u5f02\u5e38\u6cbb\u7406\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.732335", "level": "INFO", "message": "============================================================", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.733336", "level": "INFO", "message": "[1/10] \u521d\u59cb\u5316\u8ffd\u8e2a\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.932482", "level": "INFO", "message": "[2/10] \u521d\u59cb\u5316\u8bb0\u5fc6\u4e2d\u5fc3", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.934459", "level": "INFO", "message": "[3/10] \u521d\u59cb\u5316Mock\u57fa\u7840\u8bbe\u65bd", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:06.956826", "level": "INFO", "message": "[4/10] \u521d\u59cb\u5316Embedding", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:08.535411", "level": "INFO", "message": "  Embedding\u540e\u7aef: dashscope", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:08.535411", "level": "INFO", "message": "[4.1/10] \u52a0\u8f7d\u4e1a\u52a1\u6570\u636e\uff08\u7ed3\u6784\u5316\u5e93\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:13.144843", "level": "INFO", "message": "  orders: 250\u6761 (from orders.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:17.753325", "level": "INFO", "message": "  payments: 250\u6761 (from payments.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:20.503927", "level": "INFO", "message": "  risks: 150\u6761 (from risks.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:23.311766", "level": "INFO", "message": "  reconciliations: 150\u6761 (from reconciliations.json)", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:23.312769", "level": "INFO", "message": "  \u603b: orders=250, payments=250, risks=150, reconciliations=150", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:23.312769", "level": "INFO", "message": "[4.5/10] \u52a0\u8f7d\u5411\u91cf\u77e5\u8bc6\u5e93", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:27:23.330756", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5f00\u59cb", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.321879", "level": "INFO", "message": "\u77e5\u8bc6\u5e93\u52a0\u8f7d\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.321879", "level": "INFO", "message": "  \u77e5\u8bc6\u5e93\u6587\u6863: 200\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "  \u4e13\u5bb6\u6848\u4f8b: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "  \u5411\u91cf\u5e93\u5927\u5c0f: 200\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "  \u8df3\u8fc7\u53bb\u91cd: 0\u6761", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "  \u52a0\u8f7d\u8017\u65f6: 40991.1ms", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "[5/10] \u521d\u59cb\u5316\u97e7\u6027\u7cfb\u7edf", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "[6/10] \u521d\u59cb\u5316\u51b3\u7b56\u5f15\u64ce\u4e0e\u5ba1\u6279\u6d41", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.322878", "level": "INFO", "message": "[7/10] \u521d\u59cb\u5316\u72b6\u6001\u6301\u4e45\u5316", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.323878", "level": "INFO", "message": "[8/10] \u521d\u59cb\u5316Agent\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.324878", "level": "INFO", "message": "[9/10] \u521d\u59cb\u5316\u5de5\u5177\u4f53\u7cfb\u4e0eMCP", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.339861", "level": "INFO", "message": "[10/10] \u521d\u59cb\u5316\u4e13\u5bb6Agent\uff08DI\u6ce8\u5165\uff09", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.342860", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.342860", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.342860", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.342860", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.343877", "level": "INFO", "message": "Agent\u6ce8\u518c\u5230\u6c60", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.344861", "level": "INFO", "message": "\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210\uff01\u6240\u6709\u7ec4\u4ef6\u5c31\u7eea\u3002", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.347732", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.349772", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.351755", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.713924", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.715915", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.733923", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.736925", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.737928", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.749924", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.751924", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.753914", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.765923", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.767925", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.768915", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.770915", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.781923", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.784915", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.784915", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.786927", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.815924", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.816933", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.817936", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.820934", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.822932", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.823933", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.844263", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.847272", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.849267", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.875129", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.877137", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.879131", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.890697", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.893057", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.893614", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.895373", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.906730", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.909739", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.910733", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.912730", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.940676", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.941757", "level": "INFO", "message": "\u5f00\u59cb\u6267\u884c\u4efb\u52a1", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.943367", "level": "INFO", "message": "\u6b65\u9aa4\u4f18\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.944961", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.947481", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.948513", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.969060", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.971061", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.973075", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.985093", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.987056", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.988058", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:04.991055", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.016246", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.019218", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.020213", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.022213", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.048296", "level": "INFO", "message": "Agent\u521d\u59cb\u5316\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.051351", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.052358", "level": "INFO", "message": "\u6df7\u5408\u68c0\u7d22\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.054385", "level": "INFO", "message": "Agent\u9500\u6bc1\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
+{"timestamp": "2026-05-19T13:28:05.082440", "level": "INFO", "message": "\u4efb\u52a1\u6267\u884c\u5b8c\u6210", "module": "logger", "function": "info", "line": 49}
