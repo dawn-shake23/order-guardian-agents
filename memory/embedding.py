@@ -131,6 +131,16 @@ class EmbeddingProvider:
 
         # 尝试千问 DashScope API
         effective_key = api_key or os.getenv("DASHSCOPE_API_KEY", "")
+        # 回退：从 .env 文件读取
+        if not effective_key:
+            _env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+            if os.path.exists(_env_path):
+                with open(_env_path, "r", encoding="utf-8") as _f:
+                    for _line in _f:
+                        _line = _line.strip()
+                        if _line.startswith("DASHSCOPE_API_KEY="):
+                            effective_key = _line.split("=", 1)[1].strip()
+                            break
         if effective_key and _DASHSCOPE_AVAILABLE:
             try:
                 self._model = DashScopeEmbedding(api_key=effective_key)

@@ -4,6 +4,19 @@ RAG 闭环端到端验证脚本
 
 借鉴 Java KnowledgeBaseQueryService 的完整验证流程
 """
+# ── 最早：加载 .env ──────────────────────────────────
+import os as _os
+from pathlib import Path as _Path
+_env = _Path(__file__).resolve().parent / ".env"
+if _env.exists():
+    with open(_env, "r", encoding="utf-8") as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                _os.environ.setdefault(_k.strip(), _v.strip())
+# ──────────────────────────────────────────────────────
+
 import sys
 import time
 import numpy as np

@@ -1,5 +1,17 @@
-import uuid
+# ── 最早：加载 .env 配置 ──────────────────────────────
 import os
+from pathlib import Path
+_env_path = Path(__file__).resolve().parent / ".env"
+if _env_path.exists():
+    with open(_env_path, "r", encoding="utf-8") as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _key, _val = _line.split("=", 1)
+                os.environ.setdefault(_key.strip(), _val.strip())
+# ──────────────────────────────────────────────────────
+
+import uuid
 import time
 import json
 from memory.memory_hub import MemoryHub
