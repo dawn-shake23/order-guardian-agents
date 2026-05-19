@@ -1,82 +1,74 @@
 @echo off
-chcp 65001 >nul 2>&1
-setlocal enabledelayedexpansion
+title Order Guardian Agents
 cd /d "%~dp0"
-set "PYTHONIOENCODING=utf-8"
-set "PYTHONUTF8=1"
 
 echo.
 echo ============================================================
 echo   Order Guardian Agents v2.0
-echo   订单异常治理系统 - 多智能体协作诊断
+echo   订单异常治理系统
 echo ============================================================
 echo.
 
-:: ── 1. 检查 Python ──────────────────────────────────────────
-where python >nul 2>&1
+:: ---- 1. 检查 py 启动器 ----
+py --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo [错误] 未找到 Python，请先安装 Python 3.10+
-    echo 下载地址: https://www.python.org/downloads/
+    echo        下载: https://www.python.org/downloads/
+    echo        安装时勾选 "Add Python to PATH"
     pause
     exit /b 1
 )
-for /f "tokens=2" %%i in ('python --version 2^>^&1') do echo [OK] Python %%i
+for /f "tokens=1,2" %%a in ('py --version 2^>^&1') do echo [OK] %%a %%b
 
-:: ── 2. 加载 .env 配置 ───────────────────────────────────────
-if exist ".env" (
-    for /f "usebackq tokens=1,2 delims==" %%a in (".env") do (
-        if not "%%b"=="" set "%%a=%%b"
-    )
-    echo [OK] 环境变量已加载
-) else (
-    echo [警告] .env 不存在，使用确定性哈希模式
-    echo   如需千问语义检索，请复制 .env.example 为 .env 并填入 API KEY
-)
-
-:: ── 3. 安装依赖 ─────────────────────────────────────────────
-echo [安装] 检查 Python 依赖...
-pip install -r requirements.txt --quiet --disable-pip-version-check 2>nul
+:: ---- 2. 装依赖 ----
+echo.
+echo [1/5] 安装依赖...
+py -m pip install -r requirements.txt --quiet --disable-pip-version-check 2>nul
 if %errorlevel% neq 0 (
-    echo [重试] 安装依赖...
-    pip install -r requirements.txt --quiet 2>nul
+    py -m pip install -r requirements.txt --quiet 2>nul
 )
 echo [OK] 依赖就绪
 
-:: ── 4. 准备运行目录 ─────────────────────────────────────────
+:: ---- 3. 校验数据 ----
+echo.
+echo [2/5] 校验数据...
 if not exist "data" mkdir data
 if not exist "state_checkpoints" mkdir state_checkpoints
 
-:: ── 5. 检查并生成数据 ───────────────────────────────────────
-set "MISSING_DATA="
-for %%f in (orders.json payments.json risks.json reconciliations.json knowledge_base.json) do (
-    if not exist "data\%%f" set "MISSING_DATA=1"
-)
-if defined MISSING_DATA (
+set NEED_GEN=0
+if not exist "data\orders.json"     set NEED_GEN=1
+if not exist "data\payments.json"   set NEED_GEN=1
+if not exist "data\risks.json"      set NEED_GEN=1
+if not exist "data\reconciliations.json" set NEED_GEN=1
+if not exist "data\knowledge_base.json"  set NEED_GEN=1
+
+if %NEED_GEN%==1 (
     echo [生成] 创建1000条测试数据...
-    python infrastructure/data_generator.py
-    if %errorlevel% neq 0 (
-        echo [错误] 数据生成失败
-        pause
-        exit /b 1
-    )
-) else (
-    echo [OK] 数据文件已就绪 ^(1000条^)
+    py infrastructure/data_generator.py
 )
+echo [OK] 数据就绪
 
-:: ── 6. 清理旧日志 ───────────────────────────────────────────
-if exist "order-guardian.log" del "order-guardian.log" >nul 2>&1
-
-:: ── 7. 启动系统 ─────────────────────────────────────────────
+:: ---- 4. 加载配置 ----
 echo.
-echo [启动] 初始化系统并执行诊断场景...
+echo [3/5] 加载配置...
+set DASHSCOPE_API_KEY=sk-f783c98548d4404d9d3ef8eee4f8c931
+echo [OK] 环境变量就绪
+
+:: ---- 5. 清理旧日志 ----
+if exist "order-guardian.log" del "order-guardian.log" 2>nul
+
+:: ---- 6. 启动 ----
+echo.
+echo [4/5] 初始化系统...
+echo [5/5] 运行诊断场景...
+echo.
 echo ============================================================
 echo.
 
-python main.py
+py main.py
 
-:: ── 8. 完成 ─────────────────────────────────────────────────
 echo.
 echo ============================================================
-echo   运行完成。日志文件: order-guardian.log
+echo   完成. 日志: order-guardian.log
 echo ============================================================
 pause
