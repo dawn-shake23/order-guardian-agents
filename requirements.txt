@@ -1,30 +1,13 @@
-# ============================================================
-# Order Guardian Agents - 完整依赖清单
-# 安装: pip install -r requirements.txt
-# 启动: python main.py
-# ============================================================
-
-# --- 数据模型 ---
 pydantic>=2.0,<3.0
-
-# --- 向量检索引擎 ---
 faiss-cpu>=1.7.4
 numpy>=1.24
-
-# --- Embedding API (千问 DashScope) ---
 openai>=1.0.0
-
-# --- 配置管理 ---
 pyyaml>=6.0
-
-# --- 日志 ---
 python-json-logger>=2.0.7
-
-# --- 结构化存储（可选，当前使用Mock内存实现）---
 redis>=5.0.0
 mysql-connector-python>=8.0.0
-
-# --- 可观测性（可选）---
 opentelemetry-api>=1.20.0
 opentelemetry-sdk>=1.20.0
 opentelemetry-exporter-otlp-proto-http>=1.20.0
+jieba>=0.42
+langchain-text-splitters>=0.3.0

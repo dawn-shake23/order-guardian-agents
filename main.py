@@ -16,7 +16,8 @@ import time
 import json
 from memory.memory_hub import MemoryHub
 from memory.embedding import EmbeddingProvider
-from memory.chunking import ChunkConfig
+from memory.chunking import DocumentChunker
+from config import SystemConfig, ChunkConfig
 from infrastructure.kb_loader import KnowledgeBaseLoader
 from infrastructure.fake_data import init_mock_data, KNOWLEDGE_BASE, EXPERT_CASES
 from tools.tool_lifecycle import ToolLifeCycleManager
@@ -107,11 +108,12 @@ def init_system():
     logger.info("[4.1/10] 加载业务数据（结构化库）")
     _load_business_data(mock_db, mock_rag)
 
-    logger.info("[4.5/10] 加载向量知识库")
+    logger.info("[4.5/10] 加载向量知识库（分块模式）")
     kb_loader = KnowledgeBaseLoader(
         memory_hub=memory_hub,
         embedding_provider=embedding_provider,
-        enable_chunking=False
+        enable_chunking=True,
+        chunk_config=ChunkConfig(chunk_size=300, chunk_overlap=50)
     )
     kb_result = _load_knowledge_base(kb_loader)
     logger.info(f"  知识库文档: {kb_result['total_documents']}条")
@@ -368,47 +370,40 @@ def print_system_status(system):
             print(f"    {sid}: order={state.order_id}, success={state.plan_success}")
 
 
-def main():
-    system = init_system()
-
-    print(f"\n{'#'*60}")
-    print(f"  场景1: 支付超时订单 (ORD00001)")
-    print(f"{'#'*60}")
-    run_task(system, "ORD00001", "支付超时，回调未到达")
-
-    print(f"\n{'#'*60}")
-    print(f"  场景2: 风控拦截订单 (ORD00003)")
-    print(f"{'#'*60}")
-    run_task(system, "ORD00003", "高风险风控拦截，黑名单用户")
-
-    print(f"\n{'#'*60}")
-    print(f"  场景3: 正常订单 (ORD00002)")
-    print(f"{'#'*60}")
-    run_task(system, "ORD00002", "订单状态确认")
-
-    print(f"\n{'#'*60}")
-    print(f"  场景4: PlanAgent缓存测试 (10秒内复用)")
-    print(f"{'#'*60}")
-    plan1 = system["plan_agent"].run({
-        "session_id": "cache_test_1", "order_id": "ORD00001",
-        "abnormal_detail": "支付超时"
-    })
-    plan2 = system["plan_agent"].run({
-        "session_id": "cache_test_2", "order_id": "ORD00001",
-        "abnormal_detail": "支付超时"
-    })
-    print(f"  同order_id两次规划: {'命中缓存' if plan1 == plan2 else '重新规划'}")
+def _run_preset_scenarios(system):
+    """Auto-run 3 diagnostic scenarios, no interaction."""
+    scenarios = [
+        ("ORD00001", "支付超时，回调未到达"),
+        ("ORD00003", "高风险风控拦截，黑名单用户"),
+        ("ORD00002", "订单状态确认"),
+    ]
+    for i, (order_id, detail) in enumerate(scenarios, 1):
+        print(f"\n{'#'*60}")
+        print(f"  Scenario {i}: {order_id} - {detail}")
+        print(f"{'#'*60}")
+        run_task(system, order_id, detail)
 
     print_system_status(system)
-
     system["heartbeat"].stop()
-
     print(f"\n{'='*60}")
-    print(f"  Order Guardian Agents 运行完成！")
+    print(f"  Auto-run complete.")
     print(f"{'='*60}")
 
 
+def main():
+    interactive_mode = "--interactive" in sys.argv
+
+    system = init_system()
+
+    _run_preset_scenarios(system)
+
+    if interactive_mode:
+        from tools.interactive import run_interactive
+        run_interactive(system)
+
+
 if __name__ == "__main__":
+    import sys
     try:
         main()
     except OrderGuardianError as e:
