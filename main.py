@@ -28,6 +28,10 @@ from agents.plan_agent import PlanAgent
 from agents import (
     OrderAgent, PaymentAgent, RiskAgent, ReconciliationAgent, OperationAgent,
 )
+from memory.memory_tiers import AgentMemoryFacade, MemoryConfig
+from memory.storage_router import StorageRouter, StorageConfig
+from memory.knowledge_catalog import KnowledgeCatalog, KnowledgeRouter
+from infrastructure.harness import HarnessOrchestrator
 from infrastructure.mock_infra import MockDB, MockRAG, MockMetrics, MockMQ
 from infrastructure.resilience import (
     CircuitBreaker, RateLimiter, HeartbeatMonitor, ConcurrencyController,
@@ -116,12 +120,14 @@ def init_system():
     _load_business_data(mock_db, mock_rag)
 
     logger.info("[4.5/10] knowledge base")
+    knowledge_catalog = KnowledgeCatalog()
     kb_loader = KnowledgeBaseLoader(
         memory_hub=memory_hub,
         embedding_provider=embedding_provider,
         enable_chunking=True,
         chunk_config=ChunkConfig(chunk_size=CFG.chunk.chunk_size,
                                  chunk_overlap=CFG.chunk.chunk_overlap),
+        knowledge_catalog=knowledge_catalog,
     )
 
     if _try_load_faiss(memory_hub):
@@ -158,7 +164,7 @@ def init_system():
     ToolLifeCycleManager.global_init(memory_hub)
     mcp = MCPGateway(memory_hub)
 
-    logger.info("[10/10] expert agents")
+    logger.info("[10/12] expert agents")
     agent_map = {}
     for name, cls in [("order", OrderAgent), ("payment", PaymentAgent),
                        ("risk", RiskAgent), ("reconciliation", ReconciliationAgent),
@@ -191,6 +197,21 @@ def init_system():
         heartbeat.beat(name)
     heartbeat.start(on_unhealthy=lambda n, i: logger.warning("heartbeat", extra={"c": n}))
 
+    logger.info("[11/12] memory facade")
+    memory_facade = AgentMemoryFacade(MemoryConfig())
+    logger.info(f"  long_term_tasks={memory_facade.long_term.task_count}")
+
+    logger.info("[12/12] storage router + knowledge catalog + harness")
+    storage_router = StorageRouter(
+        vector_store=memory_hub.vector_store,
+        memory_hub=memory_hub,
+    )
+    knowledge_catalog_reuse = knowledge_catalog
+    knowledge_router = KnowledgeRouter(knowledge_catalog)
+    harness = HarnessOrchestrator(max_workers=5, enable_parallel=True)
+    for agent_type in agent_map:
+        harness.register_agent(agent_type)
+
     logger.info("init complete")
     return {
         "coordinator": coordinator, "plan_agent": plan_agent, "mcp": mcp,
@@ -202,6 +223,9 @@ def init_system():
         "state_persistence": state_persistence, "checkpoint_manager": checkpoint_manager,
         "agent_pool": agent_pool, "concurrency": concurrency,
         "embedding_provider": embedding_provider, "kb_loader": kb_loader,
+        "memory_facade": memory_facade, "storage_router": storage_router,
+        "knowledge_catalog": knowledge_catalog, "knowledge_router": knowledge_router,
+        "harness": harness,
     }
 
 
@@ -210,6 +234,8 @@ def run_task(system, order_id, abnormal_detail=""):
     plan_agent = system["plan_agent"]
     agent_map = system["agent_map"]
     heartbeat = system["heartbeat"]
+    memory_facade = system.get("memory_facade")
+    storage_router = system.get("storage_router")
     session_id = f"sess_{uuid.uuid4().hex[:8]}"
     heartbeat.beat("coordinator")
 
@@ -231,6 +257,14 @@ def run_task(system, order_id, abnormal_detail=""):
 
     final_report = coordinator.execute(plan_result, agent_map)
     heartbeat.beat("coordinator")
+
+    if memory_facade:
+        memory_facade.finalize_task(order_id, final_report)
+    if storage_router:
+        storage_router.log_task({"session_id": session_id, "order_id": order_id,
+                                  "risk_level": final_report.get("risk_level"),
+                                  "success": final_report.get("plan_success"),
+                                  "duration_ms": final_report.get("total_duration_ms", 0)})
 
     print(f"\n  Result:")
     print(f"    success : {final_report['plan_success']}")

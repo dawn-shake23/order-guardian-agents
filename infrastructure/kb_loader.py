@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from memory.embedding import EmbeddingProvider
 from memory.chunking import DocumentChunker
 from config import ChunkConfig
+from memory.knowledge_catalog import KnowledgeCatalog
 from memory.memory_hub import MemoryHub
 from core.logger import get_logger
 
@@ -56,12 +57,14 @@ class KnowledgeBaseLoader:
     def __init__(self, memory_hub: MemoryHub,
                  embedding_provider: Optional[EmbeddingProvider] = None,
                  chunk_config: Optional[ChunkConfig] = None,
-                 enable_chunking: bool = True):
+                 enable_chunking: bool = True,
+                 knowledge_catalog: Optional[KnowledgeCatalog] = None):
         self.memory_hub = memory_hub
         self.embedding = embedding_provider or EmbeddingProvider(dim=1024)
         self.enable_chunking = enable_chunking
         self.chunk_config = chunk_config or ChunkConfig()
         self.chunker = DocumentChunker(config=self.chunk_config, embedding_provider=self.embedding) if enable_chunking else None
+        self.catalog = knowledge_catalog
         self.logger = get_logger("kb_loader")
 
         # 内容哈希去重 — 借鉴 Java FileHashService
@@ -184,6 +187,13 @@ class KnowledgeBaseLoader:
 
             self.memory_hub.struct_mysql.save("documents", doc_id, struct_data)
             self._update_vector_status(doc_id, VectorStatus.COMPLETED)
+            if self.catalog:
+                import re
+                error_codes = re.findall(r'E\d{4}', f"{title} {content}")
+                keywords = re.findall(r'[\w一-鿿]{2,}', title)
+                self.catalog.register(doc_id=doc_id, title=title, biz_domain=biz_domain,
+                                      keywords=keywords[:8], error_codes=error_codes,
+                                      sub_category=doc_type)
             self._stats.documents += 1
             return True
 
