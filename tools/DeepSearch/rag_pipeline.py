@@ -118,14 +118,19 @@ class RAGPipeline:
         context_text = "\n\n---\n\n".join(context_parts)
 
         # 7. build prompts + LLM answer generation
+        if not context_text:
+            context_text = "no matching documents found in knowledge base"
         system_prompt, user_prompt = self.prompt_builder.build(context_text, query, domain)
         answer = ""
         if self.llm and self.llm.available:
             answer = self.llm.chat(system_prompt, user_prompt)
+        elif not results:
+            answer = "No matching documents found in the knowledge base. Try a different query or domain."
 
         total_ms = (time.time() - start_time) * 1000
 
-        print(f"  [RAG] answer generated: {len(answer)} chars, total={total_ms:.1f}ms\n")
+        if results:
+            print(f"  [RAG] hits={len(results)}, answer={len(answer)}chars, time={total_ms:.0f}ms\n")
 
         return {
             "query": query, "clean_query": clean_query, "keywords": keywords,

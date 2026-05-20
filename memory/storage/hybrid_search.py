@@ -88,18 +88,19 @@ class HybridSearchEngine:
         if biz_domain or filters:
             candidate_doc_ids = self._pre_filter(biz_domain, filters, exclude_deleted, exclude_archived)
             if candidate_doc_ids is not None and len(candidate_doc_ids) == 0:
-                self.logger.info("预过滤后无候选文档", extra={"biz_domain": biz_domain, "filters": filters})
-                return []
+                self.logger.debug("pre_filter_empty", extra={"biz_domain": biz_domain})
 
         # Step 2: 向量检索
         raw_results = self.vector_store.search(query_embedding, k=top_k * 3)
 
         # Step 3: 用预过滤结果裁剪向量检索结果
+        # If pre-filter returned empty set, skip filtering (use raw vector results)
+        skip_filter = (candidate_doc_ids is not None and len(candidate_doc_ids) == 0)
         filtered_results = []
         for r in raw_results:
             meta = r.get("metadata", {})
             doc_id = meta.get("doc_id", "")
-            if candidate_doc_ids is not None and doc_id not in candidate_doc_ids:
+            if not skip_filter and candidate_doc_ids is not None and doc_id not in candidate_doc_ids:
                 continue
             if exclude_deleted and meta.get("is_deleted", False):
                 continue

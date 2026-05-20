@@ -1,69 +1,70 @@
 import logging
 import json
+import os
 from datetime import datetime
 from typing import Dict, Any, Optional
 
+_initialized = False
+
+
+def _setup_root_logger():
+    global _initialized
+    if _initialized:
+        return
+    _initialized = True
+
+    root = logging.getLogger("order-guardian")
+    root.setLevel(logging.DEBUG)
+
+    # Console: WARNING+ only (no JSON noise in interactive mode)
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.WARNING)
+    ch.setFormatter(logging.Formatter("%(levelname)s %(message)s"))
+    root.addHandler(ch)
+
+    # File: DEBUG+ with JSON format
+    fh = logging.FileHandler("order-guardian.log", encoding="utf-8")
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(JsonFormatter())
+    root.addHandler(fh)
+
+
 class JsonFormatter(logging.Formatter):
-    """JSON格式的日志格式化器"""
     def format(self, record):
-        log_record = {
-            "timestamp": datetime.utcnow().isoformat(),
+        obj = {
+            "ts": datetime.utcnow().isoformat(),
             "level": record.levelname,
-            "message": record.getMessage(),
+            "msg": record.getMessage(),
             "module": record.module,
-            "function": record.funcName,
-            "line": record.lineno
+            "func": record.funcName,
         }
-        
-        # 添加额外的上下文信息
-        if hasattr(record, "extra"):
-            log_record.update(record.extra)
-        
-        # 处理异常信息
+        if hasattr(record, "extra") and record.extra:
+            obj["extra"] = record.extra
         if record.exc_info:
-            log_record["exc_info"] = self.formatException(record.exc_info)
-        
-        return json.dumps(log_record)
+            obj["exc"] = self.formatException(record.exc_info)
+        return json.dumps(obj, ensure_ascii=False)
+
 
 class Logger:
-    """日志管理器"""
     def __init__(self, name: str):
-        self.logger = logging.getLogger(name)
-        self.logger.setLevel(logging.INFO)
-        
-        # 避免重复添加处理器
-        if not self.logger.handlers:
-            # 创建控制台处理器
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(JsonFormatter())
-            self.logger.addHandler(console_handler)
-            
-            # 创建文件处理器
-            file_handler = logging.FileHandler("order-guardian.log")
-            file_handler.setFormatter(JsonFormatter())
-            self.logger.addHandler(file_handler)
-    
-    def info(self, message: str, extra: Optional[Dict[str, Any]] = None):
-        """记录信息级别的日志"""
-        extra = extra or {}
-        self.logger.info(message, extra=extra)
-    
-    def error(self, message: str, extra: Optional[Dict[str, Any]] = None, exc_info: Optional[bool] = False):
-        """记录错误级别的日志"""
-        extra = extra or {}
-        self.logger.error(message, extra=extra, exc_info=exc_info)
-    
-    def warning(self, message: str, extra: Optional[Dict[str, Any]] = None):
-        """记录警告级别的日志"""
-        extra = extra or {}
-        self.logger.warning(message, extra=extra)
-    
-    def debug(self, message: str, extra: Optional[Dict[str, Any]] = None):
-        """记录调试级别的日志"""
-        extra = extra or {}
-        self.logger.debug(message, extra=extra)
+        _setup_root_logger()
+        self.logger = logging.getLogger(f"order-guardian.{name}")
 
-# 全局日志实例
+    def info(self, message: str, extra: Optional[Dict[str, Any]] = None):
+        self.logger.info(message, extra={"extra": extra} if extra else {})
+
+    def error(self, message: str, extra: Optional[Dict[str, Any]] = None, exc_info: bool = False):
+        self.logger.error(message, extra={"extra": extra} if extra else {}, exc_info=exc_info)
+
+    def warning(self, message: str, extra: Optional[Dict[str, Any]] = None):
+        self.logger.warning(message, extra={"extra": extra} if extra else {})
+
+    def debug(self, message: str, extra: Optional[Dict[str, Any]] = None):
+        self.logger.debug(message, extra={"extra": extra} if extra else {})
+
+
 def get_logger(name: str = "order-guardian") -> Logger:
-    """获取日志实例"""
     return Logger(name)
+
+os.makedirs("data", exist_ok=True)
+os.makedirs("state_checkpoints", exist_ok=True)

@@ -27,7 +27,9 @@ class ModelType(str, Enum):
 class LLMClient:
     """DashScope Chat LLM client."""
 
-    def __init__(self, config: Optional[LLMConfig] = None, api_key: Optional[str] = None):
+    def __init__(self, config: Optional[LLMConfig] = None, api_key: Optional[str] = None,
+                 model_type: Optional[ModelType] = None):
+        self.model_type = model_type or ModelType.QWEN_14B
         self.config = config or LLMConfig()
         self.api_key = api_key or os.getenv("DASHSCOPE_API_KEY", "")
         self.logger = get_logger("llm_client")

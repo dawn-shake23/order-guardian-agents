@@ -35,6 +35,7 @@ class IntentConfig:
 
 @dataclass
 class PreprocessConfig:
+    stopwords_file: str = ""
     max_keywords: int = 8
     min_keyword_len: int = 2
     stopwords: List[str] = field(default_factory=lambda: [

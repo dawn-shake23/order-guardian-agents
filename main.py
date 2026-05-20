@@ -293,11 +293,15 @@ def _print_status(system):
 def main():
     interactive_mode = "--interactive" in sys.argv
     system = init_system()
-    _run_preset_scenarios(system)
 
     if interactive_mode:
+        print(f"\n{'='*60}")
+        print(f"  System initialized. Ready for interaction.")
+        print(f"{'='*60}")
         from tools.interactive import run_interactive
         run_interactive(system)
+    else:
+        _run_preset_scenarios(system)
 
 
 if __name__ == "__main__":
