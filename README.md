@@ -1,175 +1,210 @@
 # Order Guardian Agents
 
-基于多智能体协作（Multi-Agent）+ 深度检索（DeepSearch）的**双层订单异常治理系统**。
+Multi-Agent + RAG payment risk intelligent diagnostic analysis system.
 
 ---
 
-## 快速开始
+## Quick Start
 
 ```bash
-# 1. 安装依赖（仅首次）
 pip install -r requirements.txt
-
-# 2. 配置 API Key（编辑 .env 文件，已有默认值）
-#    DASHSCOPE_API_KEY=sk-your-key
-
-# 3. 启动系统
-python main.py
-
-# 4. RAG 闭环验证
-python test_rag.py
+python main.py                  # auto-run 3 diagnostic scenarios
+python main.py --interactive    # interactive diagnostic + RAG QA mode
+python test_rag.py              # RAG 10-step pipeline verification
 ```
 
 ---
 
-## 完整技术栈
+## Tech Stack
 
-### 向量生成方案
+### Embedding & Vector Search
 
-| 组件 | 技术 | 说明 |
-|------|------|------|
-| **主方案** | 千问 DashScope `text-embedding-v3` | 1024维，OpenAI兼容API，批量上限10条 |
-| **回退方案** | 确定性哈希 Embedding | 零依赖，1024维，字符n-gram+MD5哈希+TF-IDF加权 |
-| **多模态** | 千问 `qwen-vl-plus` 视觉理解 + `tongyi-embedding-vision-01` | 图片OCR+描述+向量化 |
-| **SDK** | `openai>=1.0.0` | 通过 DashScope 兼容接口调用 |
+| Component | Technology | Details |
+|-----------|-----------|---------|
+| Primary | DashScope `text-embedding-v3` | 1024-dim, OpenAI-compatible API, batch limit 10 |
+| Fallback | Deterministic Hash | Zero-dependency, n-gram + MD5 hash + TF-IDF weighting |
+| Vector DB | FAISS (faiss-cpu 1.7.4+) | IndexFlatL2, exact L2 distance search, disk persistence |
+| Hybrid Search | 3-route + RRF Fusion | Vector (semantic) + BM25 (keyword) + Rule (business filter) |
+| Deep Search | Multi-stage ranking | Query decomposition -> multi-recall -> RRF fusion -> coarse rank -> fine rank -> cross-validation |
 
-### 检索引擎
+### LLM & Language Processing
 
-| 组件 | 技术 | 说明 |
-|------|------|------|
-| **向量数据库** | FAISS (faiss-cpu 1.7.4+) | IndexFlatL2，内存索引，精确搜索 |
-| **距离算法** | L2 欧氏距离 | FAISS IndexFlatL2 |
-| **混合检索** | 三路召回 + RRF 融合 | Vector(语义) + BM25(关键词) + Rule(业务规则) |
-| **深度检索** | DeepSearch 多级排序 | 查询理解→多路召回→RRF融合→粗排→精排→交叉验证 |
-| **上下文管理** | 噪声过滤 + 上下文窗口压缩 | n-gram相关性校验 + Token预算动态截断 |
+| Component | Technology | Details |
+|-----------|-----------|---------|
+| Chat LLM | DashScope `qwen-plus` | Natural language answer generation |
+| Embedding | DashScope `text-embedding-v3` | 1024-dim vectors |
+| Vision | DashScope `qwen-vl-plus` | Image analysis / OCR |
+| Chinese NLP | jieba | Word segmentation + keyword extraction + stopword filtering |
+| Intent Recognition | Rule-based keyword matching | ERNIE/BERT upgrade interface reserved |
+| Text Chunking | LangChain RecursiveCharacterTextSplitter | chunk_size=300, chunk_overlap=50 |
 
-### 大模型
+### Agent Architecture
 
-| 组件 | 技术 | 说明 |
-|------|------|------|
-| **Embedding** | DashScope text-embedding-v3 | 1024维向量 |
-| **视觉理解** | DashScope qwen-vl-plus | 图片分析/OCR |
-| **LLM调用** | 可插拔 LLMClient | 当前Mock模式，支持 qwen/gpt/llama |
+| Component | Technology | Details |
+|-----------|-----------|---------|
+| Agent Protocol | Custom MCP (Multi-Agent Cooperation Protocol) | ACL matrix, context slicing, memory access control |
+| Task Scheduling | Harness Orchestrator | DAG dependency execution, parallel/serial, priority scheduling |
+| Lifecycle | AgentLifecycleManager | 8-state tracking (uninitialized -> idle -> running -> completed/failed) |
+| Resilience | CircuitBreaker + RateLimiter + Heartbeat + ConcurrencyController | Failure threshold, sliding window, health checks |
 
-### Python 依赖库
+### Memory & Storage
 
-| 包名 | 版本 | 用途 |
-|------|------|------|
-| `pydantic` | >=2.0 | 数据模型/配置校验 |
-| `faiss-cpu` | >=1.7.4 | 向量索引与L2检索 |
-| `numpy` | >=1.24 | 向量运算 |
-| `openai` | >=1.0.0 | DashScope API 调用 |
-| `pyyaml` | >=6.0 | 配置解析 |
-| `python-json-logger` | >=2.0.7 | JSON格式日志 |
-| `redis` | >=5.0.0 | 结构化缓存（可选） |
-| `mysql-connector-python` | >=8.0.0 | 持久化存储（可选） |
-| `opentelemetry-*` | >=1.20.0 | 可观测性追踪（可选） |
+| Component | Technology | Details |
+|-----------|-----------|---------|
+| Short-term | ShortTermBuffer | Rolling window (32 entries), TTL expiration (300s), auto-compression |
+| Long-term | LongTermTaskStore | Persistent task history, indexed by order_id, disk-backed |
+| Experience | ExperienceRepository | Auto-learning error_code->solution mappings |
+| Hot Store | In-memory with TTL | Structured business data (orders, payments, risks) |
+| Cold Store | JSONL append-only | Task logs, audit trails, daily files, auto-archive |
+| Rule Store | JSON config | Risk rule configurations, hot-reload support |
+| Vector Store | FAISS | Disk persistence, restart without rebuild |
+
+### Python Dependencies
+
+| Package | Version | Purpose |
+|---------|---------|---------|
+| pydantic | >=2.0 | Data models / validation |
+| faiss-cpu | >=1.7.4 | Vector index + L2 search |
+| numpy | >=1.24 | Vector operations |
+| openai | >=1.0.0 | DashScope API client |
+| pyyaml | >=6.0 | Config parsing |
+| python-json-logger | >=2.0.7 | JSON structured logging |
+| jieba | >=0.42 | Chinese word segmentation |
+| langchain-text-splitters | >=0.3.0 | RecursiveCharacterTextSplitter |
+| redis | >=5.0.0 | Structured cache (optional) |
+| mysql-connector-python | >=8.0.0 | Persistent storage (optional) |
+| opentelemetry-* | >=1.20.0 | Observability tracing (optional) |
 
 ---
 
-## 项目定位
-
-- 前置：订单脏单拦截、规则校验
-- 后置：差错池智能诊断（掉单、状态不一致、金额不匹配）
-- 全程只读、不执行资金操作、可审计、可解释
-
-## 架构分层
+## Architecture
 
 ```
-main.py                    入口：加载.env → 校验数据 → 初始化 → 诊断场景
+main.py                       Entry: load .env -> check data -> init -> diagnostic scenarios
 │
-├── agents/                专家Agent团队
-│   ├── plan_agent.py      PlanAgent: 意图理解 + 步骤规划
-│   ├── coordinator.py      Coordinator: 任务调度 + 决策汇总
-│   ├── order_agent.py      OrderAgent: 订单查询
-│   ├── payment_agent.py    PaymentAgent: 支付状态 + 错误码匹配
-│   ├── risk_agent.py       RiskAgent: 风控评估 + 规则命中
-│   ├── reconciliation_agent.py  ReconciliationAgent: 对账核查
-│   ├── operation_agent.py  OperationAgent: 综合诊断 + 运营建议
-│   └── rag_orchestrator.py Agent+RAG编排器: 工具决策 + 记忆路由
+├── agents/                   Expert agent team
+│   ├── plan_agent.py         PlanAgent: intent understanding + step planning
+│   ├── coordinator.py        Coordinator: task scheduling + decision aggregation
+│   ├── order_agent.py        OrderAgent: transaction query
+│   ├── payment_agent.py      PaymentAgent: payment verification + error code matching
+│   ├── risk_agent.py         RiskAgent: risk assessment + rule matching
+│   ├── reconciliation_agent.py  ReconciliationAgent: financial reconciliation
+│   ├── operation_agent.py    OperationAgent: comprehensive diagnosis + action plan
+│   └── rag_orchestrator.py   Agent+RAG orchestrator: tool decision + memory routing
 │
-├── memory/                记忆体系（三级）
-│   ├── embedding.py        EmbeddingProvider: DashScope/确定性哈希/SentenceTransformer
-│   ├── chunking.py         TextSplitter: 段落→句子→Token限制→重叠窗口
-│   ├── multimodal.py       MultimodalProcessor: 图片理解+OCR+多格式文档
-│   ├── memory_hub.py       MemoryHub: 统一入口
+├── memory/                   Memory system
+│   ├── embedding.py          EmbeddingProvider: DashScope / deterministic hash / sentence-transformers
+│   ├── chunking.py           DocumentChunker: LangChain RecursiveCharacterTextSplitter
+│   ├── memory_tiers.py       ShortTermBuffer + LongTermTaskStore + ExperienceRepository
+│   ├── memory_hub.py         MemoryHub: unified memory entry point
+│   ├── storage_router.py     HotStore + ColdStore + RuleStore + StorageRouter
+│   ├── knowledge_catalog.py  Hierarchical domain catalog + KnowledgeRouter
+│   ├── multimodal.py         MultimodalProcessor: image analysis + OCR + multi-format docs
 │   └── storage/
-│       ├── vector/vector_store.py    FAISS IndexFlatL2 向量存储
-│       ├── hybrid_search.py          BM25+Vector+Rule混合检索+RRF融合
-│       ├── sync_manager.py           双库一致性管理器
-│       └── structured/               Redis/MySQL 结构化存储
+│       ├── vector/vector_store.py    FAISS IndexFlatL2 with disk persistence
+│       ├── hybrid_search.py          BM25 + Vector + Rule hybrid search + RRF fusion
+│       ├── sync_manager.py           Dual-store consistency manager
+│       └── structured/               Redis/MySQL structured storage
 │
-├── tools/                 原子工具
+├── tools/                    Atomic tools
 │   ├── DeepSearch/
-│   │   ├── vector_search.py    VectorSearchTool: Agent调用的向量检索工具
-│   │   ├── deep_search.py      DeepSearchEngine: 多路召回+粗精排+交叉验证
-│   │   ├── rag_pipeline.py     RAGPipeline: 噪声过滤+上下文压缩+Prompt构建
-│   │   └── query_rewrite.py    QueryRewriteService: LLM查询改写+候选级联
-│   ├── DataCarry/          数据读写工具
-│   ├── BaseTool/           工具基类
-│   └── tool_registry.py    工具注册表
+│   │   ├── vector_search.py     VectorSearchTool: agent-callable vector search
+│   │   ├── deep_search.py       DeepSearchEngine: multi-stage deep search
+│   │   ├── rag_pipeline.py      RAGPipeline: full retrieval + LLM generation loop
+│   │   └── query_rewrite.py     QueryRewriteService: LLM query rewrite + candidate cascade
+│   ├── preprocessing.py     jieba tokenization + keyword extraction + stopword filtering
+│   ├── intent_recognizer.py Rule-based intent recognition (domain classification)
+│   ├── text_compressor.py   TF-IDF key sentence extraction + structured field preservation
+│   ├── interactive.py       Interactive command-line mode (diagnosis / RAG QA / status)
+│   ├── DataCarry/           Data read/write tools
+│   ├── BaseTool/            Tool base class
+│   └── tool_registry.py     Tool registry
 │
-├── MCP/                   多智能体协作协议（控制平面）
-│   ├── mcp_gateway.py      MCPGateway: Coordinator↔Worker唯一通道
-│   ├── acl/                权限矩阵
-│   ├── context_manager/    上下文切片 + 会话管理
-│   ├── memory_manager/     Memory访问ACL
-│   ├── prompt_manager/     专家Prompt模板
-│   ├── tool_guard/         工具白名单
-│   └── validator/          出入参校验
+├── MCP/                     Multi-Agent Cooperation Protocol (control plane)
+│   ├── mcp_gateway.py       MCPGateway: Coordinator-Worker communication channel
+│   ├── acl/                 Permission matrix
+│   ├── context_manager/     Context slicing + session management
+│   ├── memory_manager/      Memory access ACL
+│   ├── prompt_manager/      Expert prompt templates
+│   ├── tool_guard/          Tool whitelist
+│   └── validator/           Input/output validation
 │
-├── prompts/               Prompt模板（独立文件管理）
-│   ├── system.st           系统角色+回答原则+领域知识+格式规范+约束
-│   ├── user.st             上下文注入+问题+回答要求
-│   ├── rewrite.st          查询改写规则
-│   ├── manager.py          PromptManager: 模板加载+缓存+热更新
-│   └── security.py         PromptSanitizer: 注入检测+清洗
+├── prompts/                 Prompt management
+│   ├── system.st            System role + answer principles + format spec + constraints
+│   ├── user.st              Context injection + question + requirements
+│   ├── rewrite.st           Query rewrite rules
+│   ├── agent_prompts.py     Per-agent specialized prompts (role/constraints/output/behavior)
+│   ├── manager.py           PromptManager: template loading + caching + hot-reload
+│   └── security.py          PromptSanitizer: injection detection + sanitization
 │
-├── infrastructure/        基础设施
-│   ├── data_generator.py   批量数据生成器（1000条）
-│   ├── kb_loader.py        知识库加载器（分块+Embedding+双写+去重）
-│   ├── async_pipeline.py   异步管道（Producer→Queue→Consumer模板方法）
-│   ├── fake_data.py        内置测试数据
-│   ├── mock_infra.py       Mock基础设施（DB/Redis/MQ）
-│   ├── resilience.py       韧性系统（熔断/限流/心跳/并发控制）
-│   ├── decision_engine.py  决策引擎+规则引擎
-│   ├── approval.py         审批流
-│   ├── state_persistence.py 状态持久化+断点管理
-│   └── agent_pool.py       Agent池
+├── infrastructure/          Infrastructure
+│   ├── harness.py           HarnessOrchestrator: lifecycle + priority + resources + fallback
+│   ├── data_generator.py    Bulk test data generator (1000 records)
+│   ├── kb_loader.py         Knowledge base loader (chunk + embed + dual-write + dedup)
+│   ├── async_pipeline.py    Async pipeline (Producer->Queue->Consumer template method)
+│   ├── fake_data.py         Built-in test data
+│   ├── mock_infra.py        Mock infrastructure (DB/Redis/MQ/Metrics)
+│   ├── resilience.py        Resilience (circuit breaker / rate limiter / heartbeat / concurrency)
+│   ├── decision_engine.py   Decision engine + rule engine
+│   ├── approval.py          Approval workflow
+│   ├── state_persistence.py State persistence + checkpoint management
+│   └── agent_pool.py        Agent pool
 │
-└── core/                  核心模块
-    ├── errors.py           错误码体系（E1xxx/E2xxx/E3xxx/SYS_xxx）
-    ├── logger.py            JSON格式日志
-    ├── tracing.py           OpenTelemetry追踪
-    └── order_state_machine.py 订单状态机
+├── core/                    Core modules
+│   ├── errors.py            Error code system (E1xxx/E2xxx/E3xxx/SYS_xxx)
+│   ├── logger.py            JSON structured logging (console WARNING+ / file DEBUG+)
+│   ├── tracing.py           OpenTelemetry tracing
+│   └── order_state_machine.py Order state machine
+│
+└── config.py                All tunable parameters centralized (no magic numbers)
 ```
 
 ---
 
-## 启动流程
+## Startup Flow
 
-`python main.py` 执行步骤：
+`python main.py` executes:
 
-1. **加载 .env** — 读取项目根目录 `.env` 中的 `DASHSCOPE_API_KEY`
-2. **初始化追踪** — OpenTelemetry
-3. **初始化 MemoryHub** — FAISS向量库 + Redis/MySQL存储 + 混合检索引擎
-4. **初始化Mock基础设施** — 内存DB/Redis/MQ/Metrics
-5. **加载业务数据** — 自动检测 `data/*.json`，有则批量加载(1000条)，否则用小数据集
-6. **初始化Embedding** — 千问DashScope API（有Key）/ 确定性哈希（无Key）
-7. **加载向量知识库** — 200条知识文档 → Embedding → FAISS索引
-8. **初始化韧性系统** — 熔断器/限流器/心跳/并发控制
-9. **初始化决策引擎** — 规则引擎+审批流
-10. **初始化Agent池** — 注册5个专家Agent + PlanAgent + Coordinator
-11. **启动心跳** — 所有组件健康监控
-12. **运行诊断场景** — 3个订单异常场景 + 1个缓存测试
-13. **输出状态报告** — 指标/熔断器/限流器/Agent池/心跳/持久化
+1. Load `.env` - read `DASHSCOPE_API_KEY` from project root
+2. Init tracing - OpenTelemetry
+3. Init MemoryHub - FAISS vector store + Redis/MySQL + hybrid search engine
+4. Init mock infrastructure - in-memory DB/Redis/MQ/Metrics
+5. Init embedding - DashScope API (with key) / deterministic hash (without)
+6. Load business data - auto-detect `data/*.json` (1000 records) or fallback to built-in
+7. Load knowledge base - 200+ docs -> chunk -> embed -> FAISS index (skip if persisted)
+8. Init memory facade - short-term buffer + long-term task store + experience repository
+9. Init storage router - hot/cold/rule/vector storage tiers
+10. Init knowledge catalog - hierarchical domain catalog + router
+11. Init resilience - circuit breakers / rate limiters / heartbeat / concurrency control
+12. Init decision engine - rule engine + approval workflow
+13. Init state persistence - checkpoint manager
+14. Init agent pool - register 5 expert agents + PlanAgent + Coordinator
+15. Init harness orchestrator - lifecycle management + priority scheduling + fallback strategies
+16. Init tools + MCP gateway
+17. Start heartbeat - all component health monitoring
+18. Run diagnostic scenarios - 3 preset scenarios
+19. Output status report - metrics / breakers / limiters / agent pool / heartbeat
 
 ---
 
-## 运行命令
+## Run Commands
 
 ```bash
-python main.py          # 完整系统：3个诊断场景 + 状态报告
-python test_rag.py      # RAG闭环：10步全链路验证
-python infrastructure/data_generator.py  # 生成1000条测试数据
+python main.py                                      # auto-run 3 diagnostic scenarios
+python main.py --interactive                        # interactive diagnostic + RAG QA mode
+python test_rag.py                                  # RAG 10-step pipeline verification
+python infrastructure/data_generator.py              # generate 1000 test data records
+```
+
+---
+
+## Interactive Mode Commands
+
+```
+ORD00001          run full 5-agent diagnostic pipeline for an order
+run ORD00001      same as above
+status            display system status: task counts, breakers, health
+clear             clear screen
+<any question>    RAG knowledge base query
+exit              quit
 ```
