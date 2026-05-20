@@ -3,65 +3,84 @@ Global configuration hub.
 All tunable parameters live here. No hardcoded magic numbers elsewhere.
 """
 from dataclasses import dataclass, field
-from typing import List, Dict
+from typing import Dict, List
 
 
 @dataclass
 class ChunkConfig:
-    """Text chunking parameters for langchain RecursiveCharacterTextSplitter."""
     chunk_size: int = 300
     chunk_overlap: int = 50
     separators: List[str] = field(default_factory=lambda: [
-        "\n\n", "\n", "。", "！", "？", "；", ".", "!", "?", ";", " ", ""
+        "\n\n", "\n", "。。", "！", "？", "；", ".", "!", "?", ";", " ", ""
     ])
 
 
 @dataclass
 class RetrievalConfig:
-    """FAISS retrieval parameters."""
     top_k: int = 5
     similarity_threshold: float = 0.0
-    query_expansion_top_k: int = 3
 
 
 @dataclass
 class IntentConfig:
-    """Rule-based intent recognition parameters."""
     domain_keywords: Dict[str, List[str]] = field(default_factory=lambda: {
-        "payment": ["payment", "timeout", "callback", "channel", "refund", "pay", "paid", "unpaid"],
-        "order": ["order", "status", "create", "cancel", "close", "amount", "product"],
-        "risk": ["risk", "fraud", "blacklist", "score", "block", "freeze", "intercept"],
-        "reconciliation": ["reconciliation", "reconcile", "diff", "mismatch", "ledger", "balance"],
-        "operation": ["sop", "operation", "manual", "approval", "process", "handle", "escalate"],
+        "payment": ["payment", "timeout", "callback", "channel", "refund", "pay", "E2001", "E2002", "E2003", "E2004", "E2005"],
+        "order": ["order", "status", "create", "cancel", "close", "amount", "E1001", "E1002", "E1003", "E1004"],
+        "risk": ["risk", "fraud", "blacklist", "score", "block", "freeze", "E3001", "E3002", "E3003"],
+        "reconciliation": ["reconciliation", "reconcile", "diff", "mismatch", "ledger", "E4001", "E4002"],
+        "operation": ["sop", "operation", "manual", "approval", "process", "handle"],
     })
     default_domain: str = "order"
 
 
 @dataclass
 class PreprocessConfig:
-    """jieba preprocessing parameters."""
-    stopwords_file: str = ""
     max_keywords: int = 8
     min_keyword_len: int = 2
+    stopwords: List[str] = field(default_factory=lambda: [
+        "the", "a", "an", "is", "are", "was", "were", "be", "been",
+        "have", "has", "had", "do", "does", "did", "will", "would",
+        "could", "should", "may", "might", "can", "shall",
+        "to", "of", "in", "for", "on", "with", "at", "by", "from",
+        "and", "or", "but", "not", "no", "this", "that", "it", "its",
+        "how", "what", "when", "where", "which", "who", "why",
+    ])
 
 
 @dataclass
-class RAGConfig:
-    """RAG pipeline configuration."""
-    chunk: ChunkConfig = field(default_factory=ChunkConfig)
-    retrieval: RetrievalConfig = field(default_factory=RetrievalConfig)
-    intent: IntentConfig = field(default_factory=IntentConfig)
-    preprocess: PreprocessConfig = field(default_factory=PreprocessConfig)
-    max_context_tokens: int = 4000
-    reserved_for_prompt: int = 1000
-    relevance_threshold: float = 0.1
-    domain_match_bonus: float = 0.3
+class LLMConfig:
+    model: str = "qwen-plus"
+    base_url: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    max_tokens: int = 1024
+    temperature: float = 0.1
+
+
+@dataclass
+class EmbeddingConfig:
+    model: str = "text-embedding-v3"
+    dim: int = 1024
+    batch_size: int = 10
+    base_url: str = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+
+
+@dataclass
+class PersistenceConfig:
+    vector_index_dir: str = "./data/faiss_index"
+    vector_index_file: str = "kb.index"
+    metadata_file: str = "kb_metadata.json"
+    state_dir: str = "./state_checkpoints"
+    db_path: str = "./data/mock_db.json"
 
 
 @dataclass
 class SystemConfig:
-    """Top-level system configuration."""
-    rag: RAGConfig = field(default_factory=RAGConfig)
-    embedding_dim: int = 1024
+    chunk: ChunkConfig = field(default_factory=ChunkConfig)
+    retrieval: RetrievalConfig = field(default_factory=RetrievalConfig)
+    intent: IntentConfig = field(default_factory=IntentConfig)
+    preprocess: PreprocessConfig = field(default_factory=PreprocessConfig)
+    llm: LLMConfig = field(default_factory=LLMConfig)
+    embedding: EmbeddingConfig = field(default_factory=EmbeddingConfig)
+    persistence: PersistenceConfig = field(default_factory=PersistenceConfig)
+    max_context_tokens: int = 4000
+    knowledge_base_dir: str = "./data"
     data_dir: str = "./data"
-    kb_chunking_enabled: bool = True

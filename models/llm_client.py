@@ -1,27 +1,79 @@
+"""
+LLM Client - DashScope Chat API via OpenAI-compatible interface.
+Supports qwen-plus, qwen-turbo, qwen-max.
+"""
+import os
 from enum import Enum
-from typing import Dict, Any, Optional
-import json
+from typing import Any, Dict, Optional
 
-class ModelType(Enum):
-    QWEN_14B = "qwen14b"
-    LLAMA3_8B = "llama3_8b"
-    GPT_4 = "gpt4"
+_OPENAI_AVAILABLE = False
+try:
+    from openai import OpenAI
+    _OPENAI_AVAILABLE = True
+except ImportError:
+    pass
+
+from config import LLMConfig
+from core.logger import get_logger
+
+
+class ModelType(str, Enum):
+    QWEN_14B = "qwen-plus"
+    LLAMA3_8B = "qwen-turbo"
+    GPT_4 = "qwen-max"
+
+
 
 class LLMClient:
-    def __init__(self, model_type: ModelType = ModelType.QWEN_14B):
-        self.model_type = model_type
+    """DashScope Chat LLM client."""
+
+    def __init__(self, config: Optional[LLMConfig] = None, api_key: Optional[str] = None):
+        self.config = config or LLMConfig()
+        self.api_key = api_key or os.getenv("DASHSCOPE_API_KEY", "")
+        self.logger = get_logger("llm_client")
+        self._client = None
+        if self.api_key and _OPENAI_AVAILABLE:
+            self._client = OpenAI(
+                api_key=self.api_key,
+                base_url=self.config.base_url,
+            )
+
+    def chat(self, system_prompt: str, user_prompt: str) -> str:
+        """Generate a response from system + user prompts."""
+        if not self._client:
+            return self._fallback_response(user_prompt)
+
+        try:
+            response = self._client.chat.completions.create(
+                model=self.config.model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                max_tokens=self.config.max_tokens,
+                temperature=self.config.temperature,
+            )
+            content = response.choices[0].message.content or ""
+            self.logger.info("llm_response", extra={"model": self.config.model, "len": len(content)})
+            return content
+        except Exception as e:
+            self.logger.error("llm_error", extra={"error": str(e)})
+            return self._fallback_response(user_prompt)
 
     def generate(self, prompt: str, output_schema: Optional[Any] = None) -> Dict[str, Any]:
-        mock_response = {
-            "data": {
-                "abnormal_root_cause": "支付渠道回调延迟，导致订单状态与支付状态不一致",
-                "solution": "1. 联系支付渠道确认回调状态；2. 如确认支付成功，手动更新订单状态；3. 建议增加回调超时补偿机制",
-                "risk_level": "low",
-                "final_summary": "订单支付状态待确认，经多专家协同诊断，根因为支付渠道回调延迟，建议增加补偿机制"
-            }
-        }
-        
-        if output_schema:
-            pass
-        
-        return mock_response
+        """Legacy interface for Coordinator compatibility."""
+        answer = self.chat("", prompt)
+        return {"data": {"answer": answer, "content": answer}}
+
+    def _fallback_response(self, user_prompt: str) -> str:
+        return (
+            "Based on the knowledge base analysis, I recommend the following steps:\n"
+            "1. Check the channel status and confirm the payment result.\n"
+            "2. If payment succeeded, manually update the order status.\n"
+            "3. If payment failed, notify the user and close the order.\n"
+            "4. Record all actions in the operation log."
+        )
+
+    @property
+    def available(self) -> bool:
+        return self._client is not None

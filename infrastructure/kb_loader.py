@@ -13,7 +13,8 @@ from enum import Enum
 from typing import Dict, Any, Optional, List
 from dataclasses import dataclass, field
 from memory.embedding import EmbeddingProvider
-from memory.chunking import TextSplitter, ChunkConfig, DocumentChunker
+from memory.chunking import DocumentChunker
+from config import ChunkConfig
 from memory.memory_hub import MemoryHub
 from core.logger import get_logger
 
@@ -60,8 +61,7 @@ class KnowledgeBaseLoader:
         self.embedding = embedding_provider or EmbeddingProvider(dim=1024)
         self.enable_chunking = enable_chunking
         self.chunk_config = chunk_config or ChunkConfig()
-        self.splitter = TextSplitter(config=self.chunk_config) if enable_chunking else None
-        self.chunker = DocumentChunker(splitter=self.splitter, embedding_provider=self.embedding) if enable_chunking else None
+        self.chunker = DocumentChunker(config=self.chunk_config, embedding_provider=self.embedding) if enable_chunking else None
         self.logger = get_logger("kb_loader")
 
         # 内容哈希去重 — 借鉴 Java FileHashService

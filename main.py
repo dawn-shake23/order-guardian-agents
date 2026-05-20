@@ -1,23 +1,24 @@
-# ── 最早：加载 .env 配置 ──────────────────────────────
-import os
-from pathlib import Path
-_env_path = Path(__file__).resolve().parent / ".env"
-if _env_path.exists():
-    with open(_env_path, "r", encoding="utf-8") as _f:
+# Load .env before anything else
+import os as _os
+from pathlib import Path as _Path
+_env = _Path(__file__).resolve().parent / ".env"
+if _env.exists():
+    with open(_env, "r", encoding="utf-8") as _f:
         for _line in _f:
             _line = _line.strip()
             if _line and not _line.startswith("#") and "=" in _line:
-                _key, _val = _line.split("=", 1)
-                os.environ.setdefault(_key.strip(), _val.strip())
-# ──────────────────────────────────────────────────────
+                _k, _v = _line.split("=", 1)
+                _os.environ.setdefault(_k.strip(), _v.strip())
 
+import sys
 import uuid
 import time
 import json
+
+from config import SystemConfig, ChunkConfig
 from memory.memory_hub import MemoryHub
 from memory.embedding import EmbeddingProvider
 from memory.chunking import DocumentChunker
-from config import SystemConfig, ChunkConfig
 from infrastructure.kb_loader import KnowledgeBaseLoader
 from infrastructure.fake_data import init_mock_data, KNOWLEDGE_BASE, EXPERT_CASES
 from tools.tool_lifecycle import ToolLifeCycleManager
@@ -25,15 +26,11 @@ from MCP.mcp_gateway import MCPGateway
 from agents.coordinator import Coordinator
 from agents.plan_agent import PlanAgent
 from agents import (
-    OrderAgent,
-    PaymentAgent,
-    RiskAgent,
-    ReconciliationAgent,
-    OperationAgent,
+    OrderAgent, PaymentAgent, RiskAgent, ReconciliationAgent, OperationAgent,
 )
-from infrastructure.mock_infra import MockDB, MockRAG, MockMetrics, MockMQ, MockRedis
+from infrastructure.mock_infra import MockDB, MockRAG, MockMetrics, MockMQ
 from infrastructure.resilience import (
-    CircuitBreaker, RateLimiter, HeartbeatMonitor, ConcurrencyController
+    CircuitBreaker, RateLimiter, HeartbeatMonitor, ConcurrencyController,
 )
 from infrastructure.decision_engine import DecisionEngine, RuleEngine
 from infrastructure.approval import ApprovalEngine
@@ -44,39 +41,30 @@ from core.logger import get_logger
 from core.errors import OrderGuardianError
 
 logger = get_logger("main")
+CFG = SystemConfig()
 
 
 def _load_business_data(mock_db, mock_rag):
-    """加载业务数据：优先从 data/*.json 批量加载，否则用内置小数据集"""
-    data_dir = "./data"
-    json_files = {
-        "orders": "orders.json", "payments": "payments.json",
-        "risks": "risks.json", "reconciliations": "reconciliations.json",
-    }
-
-    for table, fname in json_files.items():
-        path = os.path.join(data_dir, fname)
-        if os.path.exists(path):
+    data_dir = CFG.data_dir
+    files = {"orders": "orders.json", "payments": "payments.json",
+             "risks": "risks.json", "reconciliations": "reconciliations.json"}
+    for table, fname in files.items():
+        path = _os.path.join(data_dir, fname)
+        if _os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 records = json.load(f)
             for pk, record in records.items():
                 mock_db.insert(table, pk, record)
-            logger.info(f"  {table}: {len(records)}条 (from {fname})")
-        else:
-            logger.info(f"  {table}: 文件不存在，跳过")
-
-    if not os.path.exists(os.path.join(data_dir, "orders.json")):
+            logger.info(f"  {table}: {len(records)} records")
+    if not _os.path.exists(_os.path.join(data_dir, "orders.json")):
         init_mock_data(mock_db, mock_rag)
-        logger.info(f"  使用内置小数据集: orders={mock_db.count('orders')}, payments={mock_db.count('payments')}")
-
-    logger.info(f"  总: orders={mock_db.count('orders')}, payments={mock_db.count('payments')}, "
-                f"risks={mock_db.count('risks')}, reconciliations={mock_db.count('reconciliations')}")
+    logger.info(f"  totals: orders={mock_db.count('orders')} payments={mock_db.count('payments')} "
+                f"risks={mock_db.count('risks')} reconciliations={mock_db.count('reconciliations')}")
 
 
 def _load_knowledge_base(kb_loader):
-    """加载知识库：优先从 data/knowledge_base.json 批量加载"""
-    kb_path = "./data/knowledge_base.json"
-    if os.path.exists(kb_path):
+    kb_path = _os.path.join(CFG.knowledge_base_dir, "knowledge_base.json")
+    if _os.path.exists(kb_path):
         with open(kb_path, "r", encoding="utf-8") as f:
             kb_records = json.load(f)
         kb_docs = list(kb_records.values()) if isinstance(kb_records, dict) else kb_records
@@ -84,317 +72,227 @@ def _load_knowledge_base(kb_loader):
     return kb_loader.load(KNOWLEDGE_BASE, EXPERT_CASES)
 
 
+def _try_load_faiss(memory_hub):
+    """Attempt to load persisted FAISS index; returns True if loaded."""
+    p = CFG.persistence
+    if memory_hub.vector_store.load(index_dir=p.vector_index_dir,
+                                     index_file=p.vector_index_file,
+                                     metadata_file=p.metadata_file):
+        logger.info(f"  FAISS loaded from disk: {len(memory_hub.vector_store)} vectors")
+        return True
+    return False
+
+
+def _save_faiss(memory_hub):
+    p = CFG.persistence
+    memory_hub.vector_store.save(index_dir=p.vector_index_dir,
+                                  index_file=p.vector_index_file,
+                                  metadata_file=p.metadata_file)
+    logger.info(f"  FAISS saved to disk: {len(memory_hub.vector_store)} vectors")
+
+
 def init_system():
     logger.info("=" * 60)
-    logger.info("Order Guardian Agents - 工业级订单异常治理系统")
+    logger.info("Order Guardian Agents - starting")
     logger.info("=" * 60)
 
-    logger.info("[1/10] 初始化追踪系统")
+    logger.info("[1/10] tracing")
     init_tracing()
 
-    logger.info("[2/10] 初始化记忆中心")
+    logger.info("[2/10] memory hub")
     memory_hub = MemoryHub()
 
-    logger.info("[3/10] 初始化Mock基础设施")
-    mock_db = MockDB(persist_path="./data/mock_db.json")
+    logger.info("[3/10] mock infrastructure")
+    mock_db = MockDB(persist_path=CFG.persistence.db_path)
     mock_rag = MockRAG()
     mock_mq = MockMQ()
     mock_metrics = MockMetrics()
 
-    logger.info("[4/10] 初始化Embedding")
-    embedding_provider = EmbeddingProvider(dim=1024)
-    logger.info(f"  Embedding后端: {embedding_provider.backend}")
+    logger.info("[4/10] embedding")
+    embedding_provider = EmbeddingProvider(dim=CFG.embedding.dim)
+    logger.info(f"  backend: {embedding_provider.backend}")
 
-    logger.info("[4.1/10] 加载业务数据（结构化库）")
+    logger.info("[4.1/10] business data")
     _load_business_data(mock_db, mock_rag)
 
-    logger.info("[4.5/10] 加载向量知识库（分块模式）")
+    logger.info("[4.5/10] knowledge base")
     kb_loader = KnowledgeBaseLoader(
         memory_hub=memory_hub,
         embedding_provider=embedding_provider,
         enable_chunking=True,
-        chunk_config=ChunkConfig(chunk_size=300, chunk_overlap=50)
+        chunk_config=ChunkConfig(chunk_size=CFG.chunk.chunk_size,
+                                 chunk_overlap=CFG.chunk.chunk_overlap),
     )
-    kb_result = _load_knowledge_base(kb_loader)
-    logger.info(f"  知识库文档: {kb_result['total_documents']}条")
-    logger.info(f"  专家案例: {kb_result['total_cases']}条")
-    logger.info(f"  向量库大小: {kb_result['vector_store_size']}条")
-    logger.info(f"  跳过去重: {kb_result['skipped_duplicate']}条")
-    logger.info(f"  加载耗时: {kb_result['duration_ms']:.1f}ms")
 
-    logger.info("[5/10] 初始化韧性系统")
-    circuit_breakers = {
-        "order": CircuitBreaker("order", failure_threshold=3, recovery_timeout=10),
-        "payment": CircuitBreaker("payment", failure_threshold=3, recovery_timeout=10),
-        "risk": CircuitBreaker("risk", failure_threshold=3, recovery_timeout=10),
-        "reconciliation": CircuitBreaker("reconciliation", failure_threshold=3, recovery_timeout=10),
-        "operation": CircuitBreaker("operation", failure_threshold=3, recovery_timeout=10),
-    }
-    rate_limiters = {
-        "order": RateLimiter("order", max_requests=50, window_seconds=60),
-        "payment": RateLimiter("payment", max_requests=50, window_seconds=60),
-        "risk": RateLimiter("risk", max_requests=30, window_seconds=60),
-        "reconciliation": RateLimiter("reconciliation", max_requests=30, window_seconds=60),
-        "operation": RateLimiter("operation", max_requests=30, window_seconds=60),
-    }
+    if _try_load_faiss(memory_hub):
+        logger.info("  skipping rebuild (loaded from disk)")
+    else:
+        kb_result = _load_knowledge_base(kb_loader)
+        logger.info(f"  docs={kb_result['total_documents']} chunks={kb_result['total_chunks']} "
+                    f"vectors={kb_result['vector_store_size']} failed={kb_result['failed']} "
+                    f"time={kb_result['duration_ms']:.0f}ms")
+        _save_faiss(memory_hub)
+
+    logger.info("[5/10] resilience")
+    circuit_breakers = {}
+    rate_limiters = {}
+    for name in ["order", "payment", "risk", "reconciliation", "operation"]:
+        circuit_breakers[name] = CircuitBreaker(name, failure_threshold=3, recovery_timeout=10)
+        rate_limiters[name] = RateLimiter(name, max_requests=50, window_seconds=60)
     heartbeat = HeartbeatMonitor(interval_seconds=10)
     concurrency = ConcurrencyController(max_concurrent=5)
 
-    logger.info("[6/10] 初始化决策引擎与审批流")
+    logger.info("[6/10] decision engine")
     rule_engine = RuleEngine()
     decision_engine = DecisionEngine(rule_engine)
     approval_engine = ApprovalEngine()
 
-    logger.info("[7/10] 初始化状态持久化")
-    state_persistence = StatePersistence(persist_dir="./state_checkpoints")
+    logger.info("[7/10] state persistence")
+    state_persistence = StatePersistence(persist_dir=CFG.persistence.state_dir)
     checkpoint_manager = CheckpointManager(state_persistence)
 
-    logger.info("[8/10] 初始化Agent池")
+    logger.info("[8/10] agent pool")
     agent_pool = AgentPool(max_per_type=3)
 
-    logger.info("[9/10] 初始化工具体系与MCP")
+    logger.info("[9/10] tools + MCP")
     ToolLifeCycleManager.global_init(memory_hub)
     mcp = MCPGateway(memory_hub)
 
-    logger.info("[10/10] 初始化专家Agent（DI注入）")
-    agent_map = {
-        "order": OrderAgent(
+    logger.info("[10/10] expert agents")
+    agent_map = {}
+    for name, cls in [("order", OrderAgent), ("payment", PaymentAgent),
+                       ("risk", RiskAgent), ("reconciliation", ReconciliationAgent),
+                       ("operation", OperationAgent)]:
+        agent_map[name] = cls(
             memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
             metrics=mock_metrics,
-            circuit_breaker=circuit_breakers["order"],
-            rate_limiter=rate_limiters["order"]
-        ),
-        "payment": PaymentAgent(
-            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
-            metrics=mock_metrics,
-            circuit_breaker=circuit_breakers["payment"],
-            rate_limiter=rate_limiters["payment"]
-        ),
-        "risk": RiskAgent(
-            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
-            metrics=mock_metrics,
-            circuit_breaker=circuit_breakers["risk"],
-            rate_limiter=rate_limiters["risk"]
-        ),
-        "reconciliation": ReconciliationAgent(
-            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
-            metrics=mock_metrics,
-            circuit_breaker=circuit_breakers["reconciliation"],
-            rate_limiter=rate_limiters["reconciliation"]
-        ),
-        "operation": OperationAgent(
-            memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
-            metrics=mock_metrics,
-            circuit_breaker=circuit_breakers["operation"],
-            rate_limiter=rate_limiters["operation"]
-        ),
-    }
-
-    for agent_type, agent in agent_map.items():
-        agent_pool.register(agent_type, agent)
+            circuit_breaker=circuit_breakers[name],
+            rate_limiter=rate_limiters[name],
+        )
+        agent_pool.register(name, agent_map[name])
 
     plan_agent = PlanAgent(
-        memory_hub=memory_hub,
-        metrics=mock_metrics,
+        memory_hub=memory_hub, metrics=mock_metrics,
         circuit_breaker=CircuitBreaker("plan", failure_threshold=3),
-        rate_limiter=RateLimiter("plan", max_requests=20, window_seconds=60)
+        rate_limiter=RateLimiter("plan", max_requests=20, window_seconds=60),
     )
 
     coordinator = Coordinator(
-        mcp=mcp,
-        memory_hub=memory_hub,
-        mock_db=mock_db,
-        mock_rag=mock_rag,
-        metrics=mock_metrics,
-        mock_mq=mock_mq,
-        decision_engine=decision_engine,
-        approval_engine=approval_engine,
-        state_persistence=state_persistence,
-        agent_pool=agent_pool,
-        concurrency_controller=concurrency
+        mcp=mcp, memory_hub=memory_hub, mock_db=mock_db, mock_rag=mock_rag,
+        metrics=mock_metrics, mock_mq=mock_mq,
+        decision_engine=decision_engine, approval_engine=approval_engine,
+        state_persistence=state_persistence, agent_pool=agent_pool,
+        concurrency_controller=concurrency,
     )
 
-    heartbeat.register("coordinator")
-    heartbeat.register("order_agent")
-    heartbeat.register("payment_agent")
-    heartbeat.register("risk_agent")
     for name in ["coordinator", "order_agent", "payment_agent", "risk_agent",
-                  "reconciliation_agent", "operation_agent"]:
+                 "reconciliation_agent", "operation_agent"]:
+        heartbeat.register(name)
         heartbeat.beat(name)
-    heartbeat.start(on_unhealthy=lambda n, i: logger.warning("心跳异常", extra={"component": n, "info": i}))
+    heartbeat.start(on_unhealthy=lambda n, i: logger.warning("heartbeat", extra={"c": n}))
 
-    logger.info("系统初始化完成！所有组件就绪。")
-
+    logger.info("init complete")
     return {
-        "coordinator": coordinator,
-        "plan_agent": plan_agent,
-        "mcp": mcp,
-        "memory_hub": memory_hub,
-        "agent_map": agent_map,
-        "mock_db": mock_db,
-        "mock_rag": mock_rag,
-        "mock_mq": mock_mq,
-        "mock_metrics": mock_metrics,
-        "heartbeat": heartbeat,
-        "circuit_breakers": circuit_breakers,
-        "rate_limiters": rate_limiters,
-        "decision_engine": decision_engine,
-        "approval_engine": approval_engine,
-        "state_persistence": state_persistence,
-        "checkpoint_manager": checkpoint_manager,
-        "agent_pool": agent_pool,
-        "concurrency": concurrency,
-        "embedding_provider": embedding_provider,
-        "kb_loader": kb_loader,
+        "coordinator": coordinator, "plan_agent": plan_agent, "mcp": mcp,
+        "memory_hub": memory_hub, "agent_map": agent_map,
+        "mock_db": mock_db, "mock_rag": mock_rag, "mock_mq": mock_mq,
+        "mock_metrics": mock_metrics, "heartbeat": heartbeat,
+        "circuit_breakers": circuit_breakers, "rate_limiters": rate_limiters,
+        "decision_engine": decision_engine, "approval_engine": approval_engine,
+        "state_persistence": state_persistence, "checkpoint_manager": checkpoint_manager,
+        "agent_pool": agent_pool, "concurrency": concurrency,
+        "embedding_provider": embedding_provider, "kb_loader": kb_loader,
     }
 
 
-def run_task(system, order_id, abnormal_detail="支付超时"):
+def run_task(system, order_id, abnormal_detail=""):
     coordinator = system["coordinator"]
     plan_agent = system["plan_agent"]
     agent_map = system["agent_map"]
     heartbeat = system["heartbeat"]
-    mock_metrics = system["mock_metrics"]
-
     session_id = f"sess_{uuid.uuid4().hex[:8]}"
-
     heartbeat.beat("coordinator")
 
     plan_result = plan_agent.run({
-        "session_id": session_id,
-        "order_id": order_id,
-        "abnormal_detail": abnormal_detail
+        "session_id": session_id, "order_id": order_id,
+        "abnormal_detail": abnormal_detail,
     })
-
     plan_result["session_id"] = session_id
     plan_result["order_id"] = order_id
 
     print(f"\n{'='*60}")
-    print(f"  订单异常治理任务")
+    print(f"  Task: {order_id} - {abnormal_detail}")
     print(f"{'='*60}")
-    print(f"  Session: {session_id}")
-    print(f"  Order:   {order_id}")
-    print(f"  异常描述: {abnormal_detail}")
-    print(f"  规划步骤: {len(plan_result.get('steps', []))}步")
+    print(f"  session: {session_id}")
     for step in plan_result.get("steps", []):
         deps = step.get("depends_on", [])
-        print(f"    Step {step['step_id']}: [{step['expert_type']}] {step['goal']}"
-              + (f" (依赖: {deps})" if deps else ""))
+        print(f"    step {step['step_id']}: [{step['expert_type']}] {step['goal']}"
+              + (f" (deps: {deps})" if deps else ""))
 
     final_report = coordinator.execute(plan_result, agent_map)
-
     heartbeat.beat("coordinator")
 
-    print(f"\n{'='*60}")
-    print(f"  最终会诊报告")
-    print(f"{'='*60}")
-    print(f"  执行状态: {'成功' if final_report['plan_success'] else '失败'}")
-    print(f"  风险等级: {final_report['risk_level']}")
-    print(f"  决策类型: {final_report.get('decision_type', 'N/A')}")
-    print(f"  决策置信度: {final_report.get('decision_confidence', 0):.0%}")
-    print(f"  需要审批: {'是' if final_report.get('needs_approval') else '否'}")
-    print(f"  根因分析: {final_report['abnormal_root_cause']}")
-    print(f"  解决方案: {final_report['solution']}")
-    print(f"  总耗时: {final_report.get('total_duration_ms', 0):.1f}ms")
+    print(f"\n  Result:")
+    print(f"    success : {final_report['plan_success']}")
+    print(f"    risk    : {final_report['risk_level']}")
+    print(f"    decision: {final_report.get('decision_type', 'N/A')}")
+    print(f"    conf    : {final_report.get('decision_confidence', 0):.0%}")
+    print(f"    root    : {final_report['abnormal_root_cause']}")
+    print(f"    solution: {final_report['solution']}")
+    print(f"    time    : {final_report.get('total_duration_ms', 0):.1f}ms")
 
-    print(f"\n  --- 专家步骤详情 ---")
     for step in final_report.get("expert_steps", []):
-        status_icon = "OK" if step.get("status") == "completed" else "FAIL"
-        duration = step.get("duration_ms", 0)
-        print(f"  [{status_icon}] Step {step.get('step_id', '?')} "
-              f"[{step.get('expert_type', '?')}] {step.get('goal', '?')}"
-              f" ({duration:.1f}ms)")
-        if step.get("retried"):
-            print(f"       (重试成功)")
-        if step.get("degraded_from"):
-            print(f"       (降级自: {step['degraded_from']})")
+        icon = "OK" if step.get("status") == "completed" else "FAIL"
+        print(f"    [{icon}] step {step.get('step_id', '?')} [{step.get('expert_type', '?')}] "
+              f"{step.get('goal', '?')} ({step.get('duration_ms', 0):.1f}ms)")
         result = step.get("result", {})
         if isinstance(result, dict):
             for k, v in result.items():
-                if k not in ("rule_ref", "all_payments") and v is not None:
-                    val_str = str(v)
-                    if len(val_str) > 100:
-                        val_str = val_str[:100] + "..."
-                    print(f"       {k}: {val_str}")
-
-    print(f"\n  总结: {final_report['final_summary']}")
+                if k in ("rule_ref", "all_payments"):
+                    continue
+                if v is not None:
+                    vs = str(v)
+                    if len(vs) > 100:
+                        vs = vs[:100] + "..."
+                    print(f"         {k}: {vs}")
 
     return final_report
 
 
-def print_system_status(system):
-    print(f"\n{'='*60}")
-    print(f"  系统状态监控")
-    print(f"{'='*60}")
-
-    metrics = system["mock_metrics"]
-    snapshot = metrics.snapshot()
-    print(f"\n  --- 监控指标 ---")
-    print(f"  Counters:")
-    for k, v in sorted(snapshot["counters"].items()):
-        print(f"    {k}: {v:.0f}")
-    print(f"  Histograms:")
-    for k, v in sorted(snapshot["histograms"].items()):
-        print(f"    {k}: avg={v['avg']:.1f}ms, max={v['max']:.1f}ms, count={v['count']}")
-
-    print(f"\n  --- 熔断器状态 ---")
-    for name, cb in system["circuit_breakers"].items():
-        state = cb.get_state()
-        print(f"  {name}: {state['state']} (failures={state['failure_count']})")
-
-    print(f"\n  --- 限流器状态 ---")
-    for name, rl in system["rate_limiters"].items():
-        status = rl.get_status()
-        print(f"  {name}: {status['current_requests']}/{status['max_requests']} in {status['window_seconds']}s")
-
-    print(f"\n  --- Agent池状态 ---")
-    pool_status = system["agent_pool"].get_status()
-    for name, info in pool_status.items():
-        print(f"  {name}: total={info['total']}, available={info['available']}, in_use={info['in_use']}")
-
-    print(f"\n  --- 并发控制 ---")
-    conc = system["concurrency"].get_status()
-    print(f"  max={conc['max_concurrent']}, active={conc['active_count']}, available={conc['available']}")
-
-    print(f"\n  --- 心跳状态 ---")
-    health = system["heartbeat"].check_health()
-    for name, info in health.items():
-        print(f"  {name}: {info['status']} (last beat {info['last_beat_ago']}s ago)")
-
-    print(f"\n  --- 持久化会话 ---")
-    sessions = system["state_persistence"].list_sessions()
-    print(f"  已保存会话数: {len(sessions)}")
-    for sid in sessions[:5]:
-        state = system["state_persistence"].load(sid)
-        if state:
-            print(f"    {sid}: order={state.order_id}, success={state.plan_success}")
-
-
 def _run_preset_scenarios(system):
-    """Auto-run 3 diagnostic scenarios, no interaction."""
     scenarios = [
-        ("ORD00001", "支付超时，回调未到达"),
-        ("ORD00003", "高风险风控拦截，黑名单用户"),
-        ("ORD00002", "订单状态确认"),
+        ("ORD00001", "payment timeout, callback not received"),
+        ("ORD00003", "high risk block, blacklist user"),
+        ("ORD00002", "order status verification"),
     ]
-    for i, (order_id, detail) in enumerate(scenarios, 1):
-        print(f"\n{'#'*60}")
-        print(f"  Scenario {i}: {order_id} - {detail}")
-        print(f"{'#'*60}")
+    for order_id, detail in scenarios:
         run_task(system, order_id, detail)
-
-    print_system_status(system)
+    _print_status(system)
     system["heartbeat"].stop()
     print(f"\n{'='*60}")
-    print(f"  Auto-run complete.")
+    print(f"  auto-run complete.")
     print(f"{'='*60}")
+
+
+def _print_status(system):
+    print(f"\n{'='*60}")
+    print(f"  System Status")
+    print(f"{'='*60}")
+    metrics = system["mock_metrics"]
+    snap = metrics.snapshot()
+    for k, v in sorted(snap["counters"].items()):
+        print(f"  counter.{k}: {v:.0f}")
+    for name, cb in system["circuit_breakers"].items():
+        st = cb.get_state()
+        print(f"  breaker.{name}: {st['state']} (fails={st['failure_count']})")
+    health = system["heartbeat"].check_health()
+    for name, info in health.items():
+        print(f"  heartbeat.{name}: {info['status']}")
 
 
 def main():
     interactive_mode = "--interactive" in sys.argv
-
     system = init_system()
-
     _run_preset_scenarios(system)
 
     if interactive_mode:
@@ -403,10 +301,9 @@ def main():
 
 
 if __name__ == "__main__":
-    import sys
     try:
         main()
     except OrderGuardianError as e:
         logger.error(f"OrderGuardianError: {e.error_code.value} - {e.message}", extra=e.extra)
     except Exception as e:
-        logger.error(f"Unexpected error: {str(e)}", exc_info=True)
+        logger.error(f"Unexpected: {e}", exc_info=True)
