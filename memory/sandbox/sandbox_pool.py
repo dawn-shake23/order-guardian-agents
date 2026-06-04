@@ -1,5 +1,5 @@
 from typing import Dict, Optional
-from memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
+from Memory.sandbox.isolation_sandbox import IsolatedAgentSandbox
 
 class SandboxPool:
     def __init__(self):

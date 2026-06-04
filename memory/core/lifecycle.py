@@ -1,5 +1,5 @@
 from datetime import datetime
-from memory.sandbox.isolation_sandbox import SandboxMeta
+from Memory.sandbox.isolation_sandbox import SandboxMeta
 
 class MemoryLifeCycle:
     @staticmethod

@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from tools.BaseTool.base_tool import BaseTool, ToolResult
-from memory.memory_hub import MemoryHub
+from Memory.memory_hub import MemoryHub
 
 class MemoryQueryTool(BaseTool):
     def __init__(self, memory_hub: MemoryHub):

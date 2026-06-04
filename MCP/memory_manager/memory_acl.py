@@ -1,5 +1,5 @@
 from typing import Dict, Set
-from memory.memory_hub import MemoryHub
+from Memory.memory_hub import MemoryHub
 
 class MemoryACL:
     def __init__(self, memory_hub: MemoryHub):

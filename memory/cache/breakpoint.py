@@ -1,5 +1,5 @@
 from typing import Optional, Dict, Any
-from memory.storage.structured.redis_client import RedisMemoryClient
+from Memory.storage.structured.redis_client import RedisMemoryClient
 
 class BreakpointManager:
     def __init__(self, redis_client: RedisMemoryClient):
